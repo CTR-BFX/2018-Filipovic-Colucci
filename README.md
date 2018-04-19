@@ -29,8 +29,11 @@ A custom module for TopHat2 double map is provided in this repository, and can b
 
 ### Script to reproduce paper figures ###
 
-All files are provides in this repository with the exception of the GFF file for the mouse reference genome. The GFF file can be downloaded from
-ftp://ftp.ensembl.org/pub/release-84/gtf/mus_musculus/Mus_musculus.GRCm38.84.gtf.gz. Once downloaded the GFF file can be uncompressed using the command:
+All files are provides in this repository with the exception of the GFF file for the mouse reference genome. The GFF file can be downloaded from:
+
+ftp://ftp.ensembl.org/pub/release-84/gtf/mus_musculus/Mus_musculus.GRCm38.84.gtf.gz
+
+Once downloaded the GFF file can be uncompressed using the command:
 
     gunzip Mus_musculus.GRCm38.84.gtf.gz
 
