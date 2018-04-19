@@ -30,6 +30,7 @@ library("UpSetR")
 library("genefilter")
 library("scales")
 library("gtools")
+library("Cairo")
 
 message("+-------------------------------------------------------------------------------")
 message("+ Set up some constants e.g. base directories")
@@ -536,7 +537,7 @@ L11.uniq.ann <- merge(L11.uniq, ensEMBL2id, by="ensembl_gene_id")
 write.csv(L11.uniq.ann, file=paste(Project, "_UpSetR_Uniq_res_uterus_ILC1_uterus_trNK_vs_uterus_cNK.ann.csv", sep=""))
 
 message("+-------------------------------------------------------------------------------")
-message("+ Run transformations")
+message("+ Run transformations (rlog transforms)")
 message("+-------------------------------------------------------------------------------")
 
 rld.group                       <- rlogTransformation(dds.group,      blind=T)
@@ -655,6 +656,7 @@ mat2.ann                <- mat2.ann[order(sapply(mat2.ann$ensembl_gene_id, funct
 rownames(mat2.ann)      <- mat2.ann$external_gene_name
 mat2.ann                <- within(mat2.ann, rm("ensembl_gene_id", "external_gene_name", "description", "entrezgene", "chromosome_name", "gene_biotype", "Length"))
 
+mat2.ann.means         <- mat2.ann
 mat2.ann.means$uterus  <- rowMeans(subset(mat2.ann, select = c("01","02","06","07","08","12","13")), na.rm = TRUE)
 mat2.ann.means$liver   <- rowMeans(subset(mat2.ann, select = c("04","05","09","10","14","15")), na.rm = TRUE)
 mat2.ann.means         <- mat2.ann.means[ , c("uterus","liver") ]
@@ -763,7 +765,6 @@ par(bg=NA)
          label=scores$sampleFiles )) +
   geom_point(size = 5 ) + 
   xlab(pc1lab) + ylab(pc2lab) + ggtitle(paste(Project, " PCA (All Genes)", sep="")) +
-  stat_density2d(aes(alpha = ..density..), geom = "tile", contour = TRUE) +
   scale_shape_manual(name="Tissue", values = c(17, 16)) + 
   scale_fill_manual(name="Cell Type",  values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +
   scale_colour_manual(name="Cell Type", values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +
@@ -978,12 +979,12 @@ plt.MHC <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.MHC,"MHC")
 selected.ILC <- c("ENSMUSG00000026069", "ENSMUSG00000034117", "ENSMUSG00000032011", "ENSMUSG00000003882")
 plt.ILC <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.ILC,"ILC")
 
-selected.INT <- c("ENSMUSG00000055170", "ENSMUSG00000031712", "ENSMUSG00000020383", "ENSMUSG00000000869", "ENSMUSG00000036117",
-                  "ENSMUSG00000025746", "ENSMUSG00000074695", "ENSMUSG00000025383", "ENSMUSG00000025929", "ENSMUSG00000024578",
-                  "ENSMUSG00000046108", "ENSMUSG00000050222", "ENSMUSG00000025929", "ENSMUSG00000041872", "ENSMUSG00000016529",
-                  "ENSMUSG00000002603", "ENSMUSG00000027776", "ENSMUSG00000004296", "ENSMUSG00000018916", "ENSMUSG00000014599",
-                  "ENSMUSG00000038067", "ENSMUSG00000031750")
-plt.INT <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.INT,"INT")
+#selected.INT <- c("ENSMUSG00000055170", "ENSMUSG00000031712", "ENSMUSG00000020383", "ENSMUSG00000000869", "ENSMUSG00000036117",
+#                  "ENSMUSG00000025746", "ENSMUSG00000074695", "ENSMUSG00000025383", "ENSMUSG00000025929", "ENSMUSG00000024578",
+#                  "ENSMUSG00000046108", "ENSMUSG00000050222", "ENSMUSG00000025929", "ENSMUSG00000041872", "ENSMUSG00000016529",
+#                  "ENSMUSG00000002603", "ENSMUSG00000027776", "ENSMUSG00000004296", "ENSMUSG00000018916", "ENSMUSG00000014599",
+#                  "ENSMUSG00000038067", "ENSMUSG00000031750")
+#plt.INT <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.INT,"INT")
 
 
 message("+-------------------------------------------------------------------------------")
@@ -1149,16 +1150,16 @@ Decon_results_df1$group      <- sampleTable$group
 
 
 
-plot.Mast.Cells          <- makeCellTypeDeconvolutionPlot('Mast.Cells',          Decon_results_df)
-plot.Neutrophil.Cells    <- makeCellTypeDeconvolutionPlot('Neutrophil.Cells',    Decon_results_df)
-plot.Eosinophil.Cells    <- makeCellTypeDeconvolutionPlot('Eosinophil.Cells',    Decon_results_df)
-plot.B.Cells.Memory      <- makeCellTypeDeconvolutionPlot('B.Cells.Memory',      Decon_results_df)
-plot.B.Cells.Naive       <- makeCellTypeDeconvolutionPlot('B.Cells.Naive',       Decon_results_df)
-plot.Plasma.Cells        <- makeCellTypeDeconvolutionPlot('Plasma.Cells',        Decon_results_df)
-plot.T.Cells.CD8.Actived <- makeCellTypeDeconvolutionPlot('T.Cells.CD8.Actived', Decon_results_df)
-plot.T.Cells.CD8.Naive   <- makeCellTypeDeconvolutionPlot('T.Cells.CD8.Naive',   Decon_results_df)
-plot.T.Cells.CD8.Memory  <- makeCellTypeDeconvolutionPlot('T.Cells.CD8.Memory',  Decon_results_df)
-plot.M0.Macrophage       <- makeCellTypeDeconvolutionPlot('M0.Macrophage',       Decon_results_df)
+plot.Mast.Cells          <- makeCellTypeDeconvolutionPlot('Mast.Cells',          Decon_results_df1)
+plot.Neutrophil.Cells    <- makeCellTypeDeconvolutionPlot('Neutrophil.Cells',    Decon_results_df1)
+plot.Eosinophil.Cells    <- makeCellTypeDeconvolutionPlot('Eosinophil.Cells',    Decon_results_df1)
+plot.B.Cells.Memory      <- makeCellTypeDeconvolutionPlot('B.Cells.Memory',      Decon_results_df1)
+plot.B.Cells.Naive       <- makeCellTypeDeconvolutionPlot('B.Cells.Naive',       Decon_results_df1)
+plot.Plasma.Cells        <- makeCellTypeDeconvolutionPlot('Plasma.Cells',        Decon_results_df1)
+plot.T.Cells.CD8.Actived <- makeCellTypeDeconvolutionPlot('T.Cells.CD8.Actived', Decon_results_df1)
+plot.T.Cells.CD8.Naive   <- makeCellTypeDeconvolutionPlot('T.Cells.CD8.Naive',   Decon_results_df1)
+plot.T.Cells.CD8.Memory  <- makeCellTypeDeconvolutionPlot('T.Cells.CD8.Memory',  Decon_results_df1)
+plot.M0.Macrophage       <- makeCellTypeDeconvolutionPlot('M0.Macrophage',       Decon_results_df1)
 
 
 # Run the DeconRNASeq algorithm
@@ -1168,21 +1169,21 @@ Decon_results    <- DeconRNASeq(datasets=as.data.frame(NormCounts_Immune),
 
 Decon_results_df2           <- as.data.frame(Decon_results$out.all)
 rownames(Decon_results_df2) <- paste0(sampleTable$sampleName, "_", sampleTable$group)
-#Decon_results_df2$cell      <- sampleTable$cell
-#Decon_results_df2$tissue    <- sampleTable$tissue
-#Decon_results_df2$group     <- sampleTable$group
+Decon_results_df2$cell      <- sampleTable$cell
+Decon_results_df2$tissue    <- sampleTable$tissue
+Decon_results_df2$group     <- sampleTable$group
 
 
-plot.M1.Macrophage          <- makeCellTypeDeconvolutionPlot('M1.Macrophage',          Decon_results_df)
-plot.M2.Macrophage          <- makeCellTypeDeconvolutionPlot('M2.Macrophage',          Decon_results_df)
-plot.Treg.Cells             <- makeCellTypeDeconvolutionPlot('Treg.Cells',             Decon_results_df)
-plot.T.Cells.CD4.Memory     <- makeCellTypeDeconvolutionPlot('T.Cells.CD4.Memory',     Decon_results_df)
-plot.T.Cells.CD4.Naive      <- makeCellTypeDeconvolutionPlot('T.Cells.CD4.Naive',      Decon_results_df)
-plot.T.Cells.CD4.Follicular <- makeCellTypeDeconvolutionPlot('T.Cells.CD4.Follicular', Decon_results_df)
-plot.Th1.Cells              <- makeCellTypeDeconvolutionPlot('Th1.Cells',              Decon_results_df)
-plot.Th17.Cells             <- makeCellTypeDeconvolutionPlot('Th17.Cells',             Decon_results_df)
-plot.Th2.Cells              <- makeCellTypeDeconvolutionPlot('Th2.Cells',              Decon_results_df)
-plot.Monocyte               <- makeCellTypeDeconvolutionPlot('Monocyte',               Decon_results_df)
+plot.M1.Macrophage          <- makeCellTypeDeconvolutionPlot('M1.Macrophage',          Decon_results_df2)
+plot.M2.Macrophage          <- makeCellTypeDeconvolutionPlot('M2.Macrophage',          Decon_results_df2)
+plot.Treg.Cells             <- makeCellTypeDeconvolutionPlot('Treg.Cells',             Decon_results_df2)
+plot.T.Cells.CD4.Memory     <- makeCellTypeDeconvolutionPlot('T.Cells.CD4.Memory',     Decon_results_df2)
+plot.T.Cells.CD4.Naive      <- makeCellTypeDeconvolutionPlot('T.Cells.CD4.Naive',      Decon_results_df2)
+plot.T.Cells.CD4.Follicular <- makeCellTypeDeconvolutionPlot('T.Cells.CD4.Follicular', Decon_results_df2)
+plot.Th1.Cells              <- makeCellTypeDeconvolutionPlot('Th1.Cells',              Decon_results_df2)
+plot.Th17.Cells             <- makeCellTypeDeconvolutionPlot('Th17.Cells',             Decon_results_df2)
+plot.Th2.Cells              <- makeCellTypeDeconvolutionPlot('Th2.Cells',              Decon_results_df2)
+plot.Monocyte               <- makeCellTypeDeconvolutionPlot('Monocyte',               Decon_results_df2)
 
 # Run the DeconRNASeq algorithm
 Decon_results    <- DeconRNASeq(datasets=as.data.frame(NormCounts_Immune), 
@@ -1191,15 +1192,15 @@ Decon_results    <- DeconRNASeq(datasets=as.data.frame(NormCounts_Immune),
 
 Decon_results_df3           <- as.data.frame(Decon_results$out.all)
 rownames(Decon_results_df3) <- paste0(sampleTable$sampleName, "_", sampleTable$group)
-#Decon_results_df3$cell      <- sampleTable$cell
-#Decon_results_df3$tissue    <- sampleTable$tissue
-#Decon_results_df3$group     <- sampleTable$group
+Decon_results_df3$cell      <- sampleTable$cell
+Decon_results_df3$tissue    <- sampleTable$tissue
+Decon_results_df3$group     <- sampleTable$group
 
-plot.GammaDelta.T.Cells     <- makeCellTypeDeconvolutionPlot('GammaDelta.T.Cells', Decon_results_df)
-plot.NK.Resting             <- makeCellTypeDeconvolutionPlot('NK.Resting',         Decon_results_df)
-plot.NK.Actived             <- makeCellTypeDeconvolutionPlot('NK.Actived',         Decon_results_df)
-plot.DC.Actived             <- makeCellTypeDeconvolutionPlot('DC.Actived',         Decon_results_df)
-plot.DC.Immature            <- makeCellTypeDeconvolutionPlot('DC.Immature',        Decon_results_df)
+plot.GammaDelta.T.Cells     <- makeCellTypeDeconvolutionPlot('GammaDelta.T.Cells', Decon_results_df3)
+plot.NK.Resting             <- makeCellTypeDeconvolutionPlot('NK.Resting',         Decon_results_df3)
+plot.NK.Actived             <- makeCellTypeDeconvolutionPlot('NK.Actived',         Decon_results_df3)
+plot.DC.Actived             <- makeCellTypeDeconvolutionPlot('DC.Actived',         Decon_results_df3)
+plot.DC.Immature            <- makeCellTypeDeconvolutionPlot('DC.Immature',        Decon_results_df3)
 
 
 pdf(paste0(Project, "-ImmuCC_DeconRNASEq.pdf"),width=20,height=20, onefile=FALSE)
