@@ -102,6 +102,12 @@ ensEMBL2id <- getBM(attributes=c('ensembl_gene_id', 'external_gene_name', 'descr
 head(ensEMBL2id)
 nrow(ensEMBL2id)
 
+write.csv2(ensEMBL2id, file=paste0(Project, "_ensEMBL2id.csv"))
+ensEMBL2id       <- read.table(paste0(Project, "_ensEMBL2id.csv"), sep=";", header=TRUE, stringsAsFactors=FALSE)
+head(ensEMBL2id)
+nrow(ensEMBL2id)
+
+
 message("+-------------------------------------------------------------------------------")
 message("+ Retrieve average transcript lengths")
 message("+-------------------------------------------------------------------------------")
@@ -125,6 +131,7 @@ ensembl.aveTranscLens$ensembl_gene_id <- rownames(ensembl.aveTranscLens)
 ensEMBL2id                            <- merge(ensEMBL2id, ensembl.aveTranscLens, by="ensembl_gene_id" )
 head(ensEMBL2id)
 nrow(ensEMBL2id)
+
 
 
 message("+-------------------------------------------------------------------------------")
@@ -354,11 +361,11 @@ functionCustomMAPlot <- function(results, Project, Title, significance, log2Fold
     geom_abline(intercept = log2FoldChange, slope = 0, colour='red', alpha=0.25) + 
     geom_abline(intercept = -log2FoldChange, slope = 0, colour='red', alpha=0.25) +
     geom_point(size=0.5, alpha=0.5, col="black") +
-    geom_point(data=subset(results, (padj <= significance & log2FoldChange >= 0)), size=1, alpha=0.5,  col="blue") +
-    geom_point(data=subset(results, (padj <= significance & log2FoldChange < 0)),  size=1, alpha=0.5,  col="red") +
+    geom_point(data=subset(results, (padj <= significance & log2FoldChange >= 0)), size=1, alpha=0.5,  col="red") +
+    geom_point(data=subset(results, (padj <= significance & log2FoldChange < 0)),  size=1, alpha=0.5,  col="blue") +
     
-    geom_point(data=subset(labeldata.ann, log2FoldChange > 0), aes( x=baseMean, y=log2FoldChange), size=1.25, alpha=1.0, color='darkblue',  shape=21, stroke=0.5) +
-    geom_point(data=subset(labeldata.ann, log2FoldChange < 0), aes( x=baseMean, y=log2FoldChange), size=1.25, alpha=1.0, color='darkred', shape=21, stroke=0.5) +
+    geom_point(data=subset(labeldata.ann, log2FoldChange > 0), aes( x=baseMean, y=log2FoldChange), size=1.25, alpha=1.0, color='darkred',  shape=21, stroke=0.5) +
+    geom_point(data=subset(labeldata.ann, log2FoldChange < 0), aes( x=baseMean, y=log2FoldChange), size=1.25, alpha=1.0, color='darkblue', shape=21, stroke=0.5) +
     
     geom_point(data=labeldataB.ann, aes( x=baseMean, y=log2FoldChange), size=3, alpha=1.0, color='pink', shape=21, stroke=0.5) +
     geom_point(data=labeldataB.ann, aes( x=baseMean, y=log2FoldChange), size=1, alpha=1.0, color='pink', stroke=0.5) +
@@ -372,10 +379,10 @@ functionCustomMAPlot <- function(results, Project, Title, significance, log2Fold
     
     geom_label_repel(data=subset(labeldata.ann, log2FoldChange > 0), 
                      aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
-                     fill='blue', colour='white', point.padding = unit(0.25, "lines"),  size=6, segment.color = 'darkblue',  nudge_x = 1) +
+                     fill='red', colour='white', point.padding = unit(0.25, "lines"),  size=6, segment.color = 'darkred',  nudge_x = 1) +
     geom_label_repel(data=subset(labeldata.ann, log2FoldChange < 0), 
                      aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
-                     fill='red', colour='white', point.padding = unit(0.25, "lines"), size=6, segment.color = 'darkred', nudge_x = -1) +
+                     fill='blue', colour='white', point.padding = unit(0.25, "lines"), size=6, segment.color = 'darkblue', nudge_x = -1) +
     
     geom_label_repel(data=labeldataB.ann, 
                      aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
@@ -389,7 +396,8 @@ functionCustomMAPlot <- function(results, Project, Title, significance, log2Fold
                      aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
                      fill='blue', colour='white', point.padding = unit(0.25, "lines"),  size=6, segment.color = 'blue',  nudge_x = 2) +
     
-    scale_x_log10() + scale_y_reverse() +
+    scale_x_log10() + 
+    #scale_y_reverse() +
     xlab("Mean Normalised Read Count") + ylab("log2 Fold Change") + ggtitle(paste(Project, " DESeq2 MA ", Title, " [fc ", log2FoldChange, ", sig ", significance, "]", sep="")) 
   
   pdf(paste(Project, "_DESeq_MA_", Title, "_fc", log2FoldChange, "_sig", significance, ".pdf", sep=""),width=10,height=7, onefile=FALSE)
