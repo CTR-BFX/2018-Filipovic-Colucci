@@ -19,13 +19,13 @@ GRCm38         | [Link](http://mar2016.archive.ensembl.org/index.html)
 FastQC         | [Link](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 Trim_galore    | [Link](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/)
 TopHat2        | [DOI](http://dx.doi.org/10.1186/gb-2013-14-4-r36)
-ClusterFlow    | [DOI](http://dx.doi.org/10.12688/f1000research.10335.2)
-MultiQC        | [DOI](http://dx.doi.org/10.1093/bioinformatics/btw354)
 HTSeq-counts   | [DOI](http://dx.doi.org/10.1093/bioinformatics/btu638)
 Feature_counts | [DOI](http://dx.doi.org/10.1093/bioinformatics/btt656)
 Qualimap       | [DOI](https://doi.org/10.1093/bioinformatics/bts503)
+ClusterFlow    | [DOI](http://dx.doi.org/10.12688/f1000research.10335.2)
+MultiQC        | [DOI](http://dx.doi.org/10.1093/bioinformatics/btw354)
 
-A custom module for TopHat2 double map is provided in this repository, and can be run, by copying it into the modules directory of a ClusterFlow installation. With HTSeq-Counts gene count tables figures in the table below can be reproduced with the R script provided in this repository.
+A custom module for TopHat2 double map is provided in this repository, and can be run, by copying it into the modules directory of a ClusterFlow installation. Using just the HTSeq-Counts gene count tables, figures in the table below can be reproduced with the R script provided in this repository.
 
 ### Script to reproduce paper figures ###
 
@@ -49,17 +49,35 @@ Figure    | Output Filename                         | Description
 2D        | 2018-Filipovic-Colucci_Fig2C.pdf        | Custom Expression Plot
 X1        | X1.pdf                                  | Heatmap
 X2        | X2.pdf                                  | Heatmap
+X3        | X3.pdf                                  | DeconRNASeq Immune Cell Proportion Estimates
 
-_Additional Data_
+
+#### Figure X3: DeconRNASeq ####
+
+![DeconRNA_Example](Images/deconRNA.png?raw=true=100x)
+
+Gong, T., & Szustakowski, J. D. (2013). DeconRNASeq: a statistical framework for deconvolution of heterogeneous tissue samples based on mRNA-Seq data. Bioinformatics, 29(8), 1083–1085.
+[10.1093/bioinformatics/btt090](http://dx.doi.org/10.1093/bioinformatics/btt090)
+
+Chen, Z., Huang, A., Sun, J., Jiang, T., Qin, F. X.-F., & Wu, A. (2017). Inference of immune cell composition on the expression profiles of mouse tissue. Scientific Reports, 7, 40508.
+[10.1038/srep40508](http://dx.doi.org/10.1038/srep40508)
+
+
+
+
+
+
+### Additional Data ###
 
 Description                          | Filename
 ------------------------------------ | ------------------------
 DEG Results: Uterine_vs_Liver        | 2018-Filipovic-Colucci_DESeq2_DEGs_Uterine_vs_Liver.csv
 Bubble Time Course Plot table        | [180410_all_points_uterus.txt ](DataTables/180410_all_points_uterus.txt)
-Bubble Time Course Plot inset table  | DataTables/180410_nBF.txt
+Bubble Time Course Plot inset table  | [180410_nBF.txt](DataTables/180410_nBF.txt)
+DeconRNASeq Immune Cell Proportions Table | [10.1038/srep40508](http://dx.doi.org/10.1038/srep40508)
 
-_Session Information_
-Details for the R version an packages used
+### Session Information ###
+Details for the R version and packages used to create all figures
 
 ````
 R version 3.4.2 (2017-09-28)
