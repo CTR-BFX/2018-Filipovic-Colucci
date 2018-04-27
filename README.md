@@ -27,17 +27,13 @@ MultiQC        | [DOI](http://dx.doi.org/10.1093/bioinformatics/btw354)
 
 A custom module for TopHat2 double map is provided in this repository, and can be run, by copying it into the modules directory of a ClusterFlow installation. Using just the HTSeq-Counts gene count tables, figures in the table below can be reproduced with the R script provided in this repository.
 
-### Script to reproduce paper figures ###
+### Scripts to reproduce paper figures ###
 
-All files are provides in this repository with the exception of the GFF file for the mouse reference genome. The GFF file can be downloaded from:
-
-ftp://ftp.ensembl.org/pub/release-84/gtf/mus_musculus/Mus_musculus.GRCm38.84.gtf.gz
-
-Once downloaded the GFF file can be uncompressed using the command:
+All files are provides in this repository with the exception of the GFF file for the mouse reference genome. The GFF file can be downloaded (ftp://ftp.ensembl.org/pub/release-84/gtf/mus_musculus/Mus_musculus.GRCm38.84.gtf.gz) ad is required for the calculation of transcript lengths in the R script provided below. Once downloaded the GFF file can be uncompressed using the command:
 
     gunzip Mus_musculus.GRCm38.84.gtf.gz
 
-The provided R script assumes the script is placed in a directory containing a subdirectory (called HTSeq_Counts) with all the htseq-counts files (one per sample). The script can be run interactively in R-studio or as a batch using Rscript. Note that some of the figures in the manuscript have had some label positions moved manually to prevent overlaps.
+The provided R script assumes the script is placed in a directory containing a subdirectory (called HTSeq_Counts) with all the htseq-counts files (one per sample). The script can be run interactively in R-studio or as a batch using Rscript. Note that some of the figures in the manuscript have had some labels and axes manually edited so may differ slightly from those created by the script provided.
 
 Figure    | Output Filename                         | Description  
 --------- | --------------------------------------- | ------------------------
@@ -52,9 +48,13 @@ X2        | X2.pdf                                  | Heatmap
 X3        | X3.pdf                                  | DeconRNASeq Immune Cell Proportion Estimates
 
 
-#### Figure X3: DeconRNASeq ####
+#### Additional Methods Information ####
 
-![DeconRNA_Example](Images/deconRNA.png?raw=true=100x)
+##### Figure X3: DeconRNASeq #####
+
+<img style="float: right;" src="Images/deconRNA.png">
+
+It is possible to estimate the proportions of specific immune cell types from bulk RNA-Seq using reference data generated from known proportions of the cell types of interest (Chen et al, 2017). Methods such as DeconRNASeq (Gong & Szustakowski, 2013) take these tables of known cell proportions, defined by gene expression profiles, and use them to deconvolve bulk to estimate cell proportions with in each of the sequences samples. 
 
 Gong, T., & Szustakowski, J. D. (2013). DeconRNASeq: a statistical framework for deconvolution of heterogeneous tissue samples based on mRNA-Seq data. Bioinformatics, 29(8), 1083–1085.
 [10.1093/bioinformatics/btt090](http://dx.doi.org/10.1093/bioinformatics/btt090)
@@ -62,7 +62,12 @@ Gong, T., & Szustakowski, J. D. (2013). DeconRNASeq: a statistical framework for
 Chen, Z., Huang, A., Sun, J., Jiang, T., Qin, F. X.-F., & Wu, A. (2017). Inference of immune cell composition on the expression profiles of mouse tissue. Scientific Reports, 7, 40508.
 [10.1038/srep40508](http://dx.doi.org/10.1038/srep40508)
 
+##### Figure X4: UpSetR #####
 
+UpSetR is an alternative for plotting sets of data to visualise overlaps as a more intuitive replacement for Euler/Venn Diagrams.
+
+Conway, J. R., Lex, A., & Gehlenborg, N. (2017). UpSetR: an R package for the visualization of intersecting sets and their properties. Bioinformatics, 33(18), 2938–2940
+[10.1093/bioinformatics/btx364](https://doi.org/10.1093/bioinformatics/btx364)
 
 
 
