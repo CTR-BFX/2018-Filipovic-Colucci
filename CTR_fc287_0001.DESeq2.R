@@ -102,8 +102,8 @@ ensEMBL2id <- getBM(attributes=c('ensembl_gene_id', 'external_gene_name', 'descr
 head(ensEMBL2id)
 nrow(ensEMBL2id)
 
-write.csv2(ensEMBL2id, file=paste0(Project, "_ensEMBL2id.csv"))
-ensEMBL2id       <- read.table(paste0(Project, "_ensEMBL2id.csv"), sep=";", header=TRUE, stringsAsFactors=FALSE)
+# write.csv2(ensEMBL2id, file=paste0(Project, "_ensEMBL2id.csv"))
+# ensEMBL2id       <- read.table(paste0(Project, "_ensEMBL2id.csv"), sep=";", header=TRUE, stringsAsFactors=FALSE)
 head(ensEMBL2id)
 nrow(ensEMBL2id)
 
@@ -639,7 +639,7 @@ message("+----------------------------------------------------------------------
 
 
 
-breaksList = seq(0, 15, by = 1)
+breaksList = seq(-0.2, 16, by = 1)
 
 #------------------------------------------------------------------------------
 # Heatmap 
@@ -683,10 +683,10 @@ AnnotCols <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c
 
 pdf(paste0(Project, "_DESeq_pHeatMap_rld.tissue_res_uterus_vs_liver_CustomList.pdf"), width=7.5,height=12.5, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, col=ScaleCols, cutree_cols=3, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.tissue/res_uterus_vs_liver"))
+pheatmap(matrix2, breaks = breaksList, cluster_rows=TRUE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, col=ScaleCols, cutree_cols=3, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.tissue/res_uterus_vs_liver"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.tissue_res_uterus_vs_liver_CustomList_means.pdf"), width=5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_DESeq_pHeatMap_rld.tissue_res_uterus_vs_liver_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
 pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.tissue/res_uterus_vs_liver"))
 dev.off()
@@ -705,7 +705,7 @@ favourites <- c("ENSMUSG00000059256", "ENSMUSG00000022156", "ENSMUSG00000015441"
                 "ENSMUSG00000023951", "ENSMUSG00000021594", "ENSMUSG00000027068", "ENSMUSG00000032122", "ENSMUSG00000025464",
                 "ENSMUSG00000035385", "ENSMUSG00000035352", "ENSMUSG00000029304", "ENSMUSG00000035373", "ENSMUSG00000009185",
                 "ENSMUSG00000031780", "ENSMUSG00000040899", "ENSMUSG00000050232", "ENSMUSG00000030336", "ENSMUSG00000030156",
-                "ENSMUSG00000048521")
+                "ENSMUSG00000048521", "ENSMUSG00000024610")
 
 res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.df                 <- as.data.frame(res_uterus_trNK_uterus_ILC1_vs_liver_ILC1)
 res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.df                 <- res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.df[ favourites, ]
@@ -713,10 +713,13 @@ res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.df$ensembl_gene_id <- rownames(res_ute
 
 rows                       <- match(res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.df$ensembl_gene_id, row.names(rld.group))
 mat2                       <- assay(rld.group)[rows,]
-df2                        <- as.data.frame(colData(rld.group)[,c("cell", "tissue")])
+df2                        <- as.data.frame(colData(rld.group)[,c("tissue", "collated1")])
+colnames(df2)              <- c("tissue", "Comparison")
 df2                        <- df2[c("02", "04", "07", "08", "09", "12", "13", "14"),]
-df2.means                  <- as.data.frame( list( "Comparison"=c("uterus_trNK","uterus_ILC1", "liver_ILC1"),  "tissue"=c("uterus","uterus","liver")) )
-rownames(df2.means)        <- c("uterus_trNK","uterus_ILC1", "liver_ILC1")
+df2$Comparison             <- gsub("utrNK_uILC1", "uterus_trNK_ILC1", df2$Comparison)
+df2$Comparison             <- gsub("lILC1", "liver_ILC1", df2$Comparison)
+df2.means                  <- as.data.frame( list( "Group"=c("uterus_trNK_ILC1", "liver_ILC1"),  "tissue"=c("uterus","liver")) )
+rownames(df2.means)        <- c("uterus_trNK_ILC1", "liver_ILC1")
 mat2.df                    <- as.data.frame(mat2)
 mat2.df$ensembl_gene_id    <- rownames(mat2.df)
 mat2.ann                   <- merge(mat2.df, ensEMBL2id, by="ensembl_gene_id")
@@ -724,25 +727,24 @@ mat2.ann                   <- mat2.ann[order(sapply(mat2.ann$ensembl_gene_id, fu
 rownames(mat2.ann)         <- mat2.ann$external_gene_name
 mat2.ann                   <- within(mat2.ann, rm("ensembl_gene_id", "external_gene_name", "description", "entrezgene", "chromosome_name", "gene_biotype", "Length"))
 mat2.ann.means             <- mat2.ann
-mat2.ann.means$uterus_trNK <- rowMeans(subset(mat2.ann, select = c("02", "07", "12")), na.rm = TRUE)
-mat2.ann.means$uterus_ILC1 <- rowMeans(subset(mat2.ann, select = c("08","13")),        na.rm = TRUE)
+mat2.ann.means$uterus_trNK_ILC1 <- rowMeans(subset(mat2.ann, select = c("02", "07", "12", "08","13")), na.rm = TRUE)
 mat2.ann.means$liver_ILC1  <- rowMeans(subset(mat2.ann, select = c("04","09","14")),   na.rm = TRUE)
-mat2.ann.means             <- mat2.ann.means[ , c("uterus_trNK","uterus_ILC1", "liver_ILC1") ]
+mat2.ann.means             <- mat2.ann.means[ , c("uterus_trNK_ILC1", "liver_ILC1") ]
 mat2.ann                   <- mat2.ann[, c("02", "04", "07", "08", "09", "12", "13", "14")]
 matrix2                    <- as.matrix(mat2.ann)
 matrix2.means              <- as.matrix(mat2.ann.means)
 
 #ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
 ScaleCols <- colorRampPalette(colors = c("red","white","blue"))(length(breaksList))
-AnnotCols       <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"))
-AnnotCols.means <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_trNK"="#0099FF","uterus_ILC1"="#EA5160", "liver_ILC1"="#EA5160"))
+AnnotCols       <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_trNK_ILC1"="#0099FF", "liver_ILC1"="#EA5160"))
+AnnotCols.means <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"), Group=c("uterus_trNK_ILC1"="#0099FF", "liver_ILC1"="#EA5160"))
 
 pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_trNK_uterus_ILC1_vs_liver_ILC1_CustomList.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
 pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_trNK_uterus_ILC1_vs_liver_ILC1"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_trNK_uterus_ILC1_vs_liver_ILC1_CustomList_means.pdf"), width=5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_trNK_uterus_ILC1_vs_liver_ILC1_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
 pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_trNK_uterus_ILC1_vs_liver_ILC1"))
 dev.off()
@@ -768,10 +770,15 @@ res_uterus_ILC1_uterus_trNK_vs_uterus_cNK.df$ensembl_gene_id <- rownames(res_ute
 
 rows                       <- match(res_uterus_ILC1_uterus_trNK_vs_uterus_cNK.df$ensembl_gene_id, row.names(rld.group))
 mat2                       <- assay(rld.group)[rows,]
-df2                        <- as.data.frame(colData(rld.group)[,c("cell", "tissue")])
+df2                        <- as.data.frame(colData(rld.group)[,c("tissue", "collated2")])
+colnames(df2)              <- c("tissue", "Comparison")
 df2                        <- df2[c("08","13",  "02","07","12",  "01","06"), ]
-df2.means                  <- as.data.frame( list( "Comparison"=c("uterus_ILC1", "uterus_trNK", "uterus_cNK"), "tissue"=c("uterus","uterus","uterus")) )
-rownames(df2.means)        <- c("uterus_ILC1", "uterus_trNK", "uterus_cNK")
+
+df2$Comparison             <- gsub("uILC1_utrNK", "uterus_ILC1_trNK", df2$Comparison)
+df2$Comparison             <- gsub("ucNK", "uterus_cNK", df2$Comparison)
+
+df2.means                  <- as.data.frame( list( "Comparison"=c("uterus_ILC1_trNK", "uterus_cNK"), "tissue"=c("uterus","uterus")) )
+rownames(df2.means)        <- c("uterus_ILC1_trNK", "uterus_cNK")
 mat2.df                    <- as.data.frame(mat2)
 mat2.df$ensembl_gene_id    <- rownames(mat2.df)
 mat2.ann                   <- merge(mat2.df, ensEMBL2id, by="ensembl_gene_id")
@@ -779,27 +786,26 @@ mat2.ann                   <- mat2.ann[order(sapply(mat2.ann$ensembl_gene_id, fu
 rownames(mat2.ann)         <- mat2.ann$external_gene_name
 mat2.ann                   <- within(mat2.ann, rm("ensembl_gene_id", "external_gene_name", "description", "entrezgene", "chromosome_name", "gene_biotype", "Length"))
 mat2.ann.means             <- mat2.ann
-mat2.ann.means$uterus_ILC1 <- rowMeans(subset(mat2.ann, select = c("08","13")),        na.rm = TRUE)
-mat2.ann.means$uterus_trNK <- rowMeans(subset(mat2.ann, select = c("02", "07", "12")), na.rm = TRUE)
-mat2.ann.means$uterus_cNK  <- rowMeans(subset(mat2.ann, select = c("01", "06")),   na.rm = TRUE)
-mat2.ann.means             <- mat2.ann.means[ , c("uterus_ILC1", "uterus_trNK", "uterus_cNK") ]
+mat2.ann.means$uterus_ILC1_trNK <- rowMeans(subset(mat2.ann, select = c("08","13", "02", "07", "12")),        na.rm = TRUE)
+mat2.ann.means$uterus_cNK       <- rowMeans(subset(mat2.ann, select = c("01", "06")),   na.rm = TRUE)
+mat2.ann.means             <- mat2.ann.means[ , c("uterus_ILC1_trNK", "uterus_cNK") ]
 mat2.ann                   <- mat2.ann[, c("08","13",  "02","07","12",  "01","06")]
 matrix2                    <- as.matrix(mat2.ann)
 matrix2.means              <- as.matrix(mat2.ann.means)
 
 #ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
 ScaleCols <- colorRampPalette(colors = c("red","white","blue"))(length(breaksList))
-AnnotCols       <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"))
-AnnotCols.means <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_trNK"="#0099FF","uterus_ILC1"="#EA5160", "uterus_cNK"="#FFCC00"))
+AnnotCols       <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_ILC1_trNK"="#0099FF", "uterus_cNK"="#FFCC00"))
+AnnotCols.means <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_ILC1_trNK"="#0099FF", "uterus_cNK"="#FFCC00"))
 
 pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_uterus_trNK_vs_uterus_cNK_CustomList.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
+pheatmap(matrix2, breaks = breaksList, cluster_rows=TRUE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_uterus_trNK_vs_uterus_cNK_CustomList_means.pdf"), width=5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_uterus_trNK_vs_uterus_cNK_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
+pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
 dev.off()
 
 
@@ -850,7 +856,7 @@ par(bg=NA)
 pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_cNK_vs_uterus_trNK"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_cNK_vs_uterus_trNK_CustomList_means.pdf"), width=5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_cNK_vs_uterus_trNK_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
 pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, fontsize=18, cellheight = 20, main=paste0(Project, " custom", "\nrld.group/res_uterus_cNK_vs_uterus_trNK"))
 dev.off()
@@ -903,7 +909,7 @@ par(bg=NA)
 pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=3, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_vs_uterus_trNK"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_vs_uterus_trNK_CustomList_means.pdf"), width=5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_vs_uterus_trNK_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
 pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_vs_uterus_trNK"))
 dev.off()
@@ -1330,7 +1336,7 @@ message("+----------------------------------------------------------------------
 library(DeconRNASeq)
 
 # Prep the ImmuCC data matrix for DeconRNASeq
-Immune_cells_expr_matrix                <- read.csv("/Users/rhamilto/Documents/CTR-Data/ImmuCC/srep40508-s1.csv")
+Immune_cells_expr_matrix                <- read.csv( paste0(Base.dir, "/DataTables/srep40508-s1.csv"))
 names(Immune_cells_expr_matrix)[1]      <- paste("external_gene_name") 
 Immune_cells_expr_matrix_anno           <- unique(merge(Immune_cells_expr_matrix, ensEMBL2id, by = "external_gene_name"))
 Immune_cells_expr_matrix_anno           <- Immune_cells_expr_matrix_anno[order(Immune_cells_expr_matrix_anno$entrezgene),]
@@ -1494,6 +1500,9 @@ deconRNASeq.summary.table$Group       <- gsub("cNK",  "cNK\n",  deconRNASeq.summ
 deconRNASeq.summary.table$Group       <- gsub("ILC1", "ILC1\n", deconRNASeq.summary.table$Group)
 deconRNASeq.summary.table$Group       <- gsub("trNK", "trNK\n", deconRNASeq.summary.table$Group)
 
+
+pdf(paste0(Project, "-ImmuCC_DeconRNASEq.pdf"),width=20,height=20, onefile=FALSE)
+par(bg=NA)
 ggplot(deconRNASeq.summary.table, aes(y = Immune.Cell,x = Group)) +
   geom_point(aes(size = mean, colour = Group, alpha=(1-normalisedvariance))) + 
   xlab("") + ylab("") +
@@ -1502,7 +1511,7 @@ ggplot(deconRNASeq.summary.table, aes(y = Immune.Cell,x = Group)) +
   guides(colour=guide_legend(title="Group")) +  
   guides(colour=FALSE) +
   theme_bw()
-
+dev.off()
 
 
 message("+-------------------------------------------------------------------------------")
