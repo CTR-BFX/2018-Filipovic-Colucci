@@ -52,9 +52,11 @@ X3        | X3.pdf                                  | DeconRNASeq Immune Cell Pr
 
 ##### Figure X3: DeconRNASeq #####
 
+![Images/deconRNA.png](Images/deconRNA.png?raw=true=100x)
+
 <img style="float: right;" src="Images/deconRNA.png">
 
-It is possible to estimate the proportions of specific immune cell types from bulk RNA-Seq using reference data generated from known proportions of the cell types of interest (Chen et al, 2017). Methods such as DeconRNASeq (Gong & Szustakowski, 2013) take these tables of known cell proportions, defined by gene expression profiles, and use them to deconvolve bulk to estimate cell proportions with in each of the sequences samples. 
+It is possible to estimate the proportions of specific immune cell types from bulk RNA-Seq using reference data generated from known proportions of the cell types of interest (Chen et al, 2017). Methods such as DeconRNASeq (Gong & Szustakowski, 2013) take these tables of known cell proportions, defined by gene expression profiles, and use them to deconvolve bulk to estimate cell proportions with in each of the sequences samples.
 
 Gong, T., & Szustakowski, J. D. (2013). DeconRNASeq: a statistical framework for deconvolution of heterogeneous tissue samples based on mRNA-Seq data. Bioinformatics, 29(8), 1083–1085.
 [10.1093/bioinformatics/btt090](http://dx.doi.org/10.1093/bioinformatics/btt090)
