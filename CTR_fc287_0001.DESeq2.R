@@ -1368,7 +1368,7 @@ makeCellTypeDeconvolutionPlot <- function(Cell_Type, Decon_results_df) {
            labs(y = "Cell type fraction", x = "") +
            ylim(0,0.75) +
           # expand_limits(y = 0) +
-           theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position="none")
+           theme(text = element_text(size=20), axis.text.x = element_text(angle = 90, hjust = 1), legend.position="none")
 
  return(plot)
 }
@@ -1445,7 +1445,7 @@ plot.DC.Actived             <- makeCellTypeDeconvolutionPlot('DC.Actived',      
 plot.DC.Immature            <- makeCellTypeDeconvolutionPlot('DC.Immature',        Decon_results_df3)
 
 
-pdf(paste0(Project, "-ImmuCC_DeconRNASEq.pdf"),width=20,height=20, onefile=FALSE)
+pdf(paste0(Project, "-ImmuCC_DeconRNA-Seq_Grid.pdf"),width=20,height=20, onefile=FALSE)
 par(bg=NA)
 plot_grid(plot.Mast.Cells, plot.Neutrophil.Cells, plot.Eosinophil.Cells, plot.B.Cells.Memory, plot.B.Cells.Naive,
           plot.Plasma.Cells, plot.T.Cells.CD8.Actived, plot.T.Cells.CD8.Naive, plot.T.Cells.CD8.Memory,plot.M0.Macrophage,
@@ -1501,7 +1501,7 @@ deconRNASeq.summary.table$Group       <- gsub("ILC1", "ILC1\n", deconRNASeq.summ
 deconRNASeq.summary.table$Group       <- gsub("trNK", "trNK\n", deconRNASeq.summary.table$Group)
 
 
-pdf(paste0(Project, "-ImmuCC_DeconRNASEq.pdf"),width=20,height=20, onefile=FALSE)
+pdf(paste0(Project, "-ImmuCC_DeconRNA-Seq-Bubble.pdf"),width=20,height=20, onefile=FALSE)
 par(bg=NA)
 ggplot(deconRNASeq.summary.table, aes(y = Immune.Cell,x = Group)) +
   geom_point(aes(size = mean, colour = Group, alpha=(1-normalisedvariance))) + 
