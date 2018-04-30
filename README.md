@@ -1,10 +1,17 @@
-# 2018-Filipovic-Colucci [TITLE TO BE DETERMINED]
+# Molecular definition of group 1 innate lymphoid cells in the mouse uterus
 
-**Iva Filipovic<sup>1,2,3</sup>, Russell S. Hamilton<sup>2,3</sup>, [OTHER AUTHORS], Francesco Colucci<sup>1,3,§</sup>**
+**Iva Filipovic<sup>1,2,3</sup>, Laura Chiossone<sup>4</sup>, Paola Vacca<sup>5</sup>,
+Russell S. Hamilton<sup>2,3</sup>, Jean-Marc Doisne<sup>1,6</sup>, Gerard Eberl<sup>6</sup>, Thierry Walzer<sup>7</sup>, Cristina Mingari<sup>5</sup>, Andrew Sharkey<sup>3,8</sup>, Lorenzo Moretta<sup>9</sup> & Francesco Colucci<sup>1,3,§</sup>**
 
-<sup>1</sup> Department of Obstetrics and Gynaecology, University of Cambridge, University of Cambridge School of Clinical Medicine, NIHR Cambridge Biomedical Research Centre <br>
-<sup>2</sup> Department of Physiology, Development and Neuroscience, University of Cambridge<br>
-<sup>3</sup> Centre for Trophoblast Research, University of Cambridge<br>
+<sup>1</sup> Department of Obstetrics and Gynaecology, University of Cambridge, University of Cambridge School of Clinical Medicine, NIHR Cambridge Biomedical Research Centre, UK <br>
+<sup>2</sup> Department of Physiology, Development and Neuroscience, University of Cambridge, UK <br>
+<sup>3</sup> Centre for Trophoblast Research, University of Cambridge, UK <br>
+<sup>4</sup> G. Gaslini Institute, Genoa, Italy <br>
+<sup>5</sup> Department of Experimental Medicine (DIMES), University of Genoa, Italy <br>
+<sup>6</sup> Department of Immunology, Pasteur Institute, Paris, France <br>
+<sup>7</sup> Centre International de Recherche en Infectiologie, INSERM U1111, Lyon, France <br>
+<sup>8</sup> Department of Pathology, University of Cambridge, UK <br>
+<sup>9</sup> Department of Immunology, IRCCS Bambino Gesù Children’s Hospital, Rome, Italy <br>
 <sup>§</sup> Corresponding author: fc287@medschl.cam.ac.uk <br>
 
 ### Abstract ###
