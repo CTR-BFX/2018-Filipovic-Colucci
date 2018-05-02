@@ -160,8 +160,8 @@ SLX-9343.15  | cNK  | liver
 
 Description   | URL
 ------------- | ----------
-Publication   | [Journal](http://) and [DOI](http://) <br> (To be updated on publication)
-Raw Data      | ArrayExpress EMBL-EBI <br>Data to be released on publication<br> [E-MTAB-XXXX](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-5803)
+Publication   | [Journal](http://) and [DOI](http://) <br>(To be updated on publication)
+Raw Data      | ArrayExpress EMBL-EBI [E-MTAB-6812](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6812) <br>Data to be released on publication<br>
 Colucci Group | [Colucci group website](http://moffettcoluccilab.org/francesco-colucci/)
 
 ### Contact ###
