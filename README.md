@@ -71,7 +71,7 @@ S4B       | 2018-Filipovic-Colucci_Fig.S4B.pdf          | DeconRNASeq Immune Cel
 
 #### Additional Methods Information ####
 
-##### Figure X3: DeconRNASeq #####
+##### Figure Supp 4: DeconRNASeq #####
 
 ![Images/deconRNA.png](Images/deconRNA.png?raw=true=100x)
 
