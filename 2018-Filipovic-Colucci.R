@@ -1,11 +1,39 @@
 #!/usr/local/bin/Rscript
 
+#------------------------------------------------------------------------------
+# RNA-Seq Analysis to accompany:
 #
-# CTR_fc287_0001 ::: HTSeq to DESeq2 Analysis
+# Filipovic et al, 2018      
+# Molecular definition of group 1 innate lymphoid cells in the mouse uterus
 #
-# 
+# Link to publication
+# TO ADD ONCE AVAILABLE
+#
+# Script available from:
+# https://github.com/CTR-BFX/2018-Filipovic-Colucci
+#
+# CTR Code: CTR_fc287_0001
+#
+# Analysis Performed by Russell S. Hamilton
+# CTR Bioinformatics 
+# Centre for Trophoblast Reseach, University of Cambridge, UK
 # Copyright Russell S. Hamilton (rsh46@cam.ac.uk)
 #
+#------------------------------------------------------------------------------
+# License Information
+# This program is free software: you can redistribute it and/or modify  
+# it under the terms of the GNU General Public License as published by  
+# the Free Software Foundation, version 3.
+#
+# This program is distributed in the hope that it will be useful, but 
+# WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License 
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#------------------------------------------------------------------------------
+
 
 #
 # initial install of packages
@@ -31,17 +59,26 @@ library("genefilter")
 library("scales")
 library("gtools")
 library("Cairo")
+library("GenomicRanges")
+library("rtracklayer")
 
 message("+-------------------------------------------------------------------------------")
 message("+ Set up some constants e.g. base directories")
 message("+-------------------------------------------------------------------------------")
 
-Project  <- "CTR_fc287_0001"
-Base.dir <- "/Users/rhamilto/Documents/CTR-Groups/Francesco_Colucci/CTR_fc287_0001"
+Project         <- "2018-Filipovic-Colucci"
+Base.dir        <- getwd() 
 setwd(Base.dir)
-HTSeq.dir <- paste(Base.dir,"/HTSeq_Counts", sep="")
+HTSeq.dir       <- paste(Base.dir,"/HTSeq_Counts", sep="")
+
+# Set GTFfile to point to the file on your local computer e.g. 
+GTFfile         <- "/usr/local/Genomes/Mus_musculus/GRCm38/Mus_musculus.GRCm38.84.gtf"
 
 elementTextSize <- 10
+
+significance    <- 0.05
+foldchange      <- 2
+
 
 message("+-------------------------------------------------------------------------------")
 message("+ Set up the sample table")
@@ -102,22 +139,12 @@ ensEMBL2id <- getBM(attributes=c('ensembl_gene_id', 'external_gene_name', 'descr
 head(ensEMBL2id)
 nrow(ensEMBL2id)
 
-# write.csv2(ensEMBL2id, file=paste0(Project, "_ensEMBL2id.csv"))
-# ensEMBL2id       <- read.table(paste0(Project, "_ensEMBL2id.csv"), sep=";", header=TRUE, stringsAsFactors=FALSE)
-head(ensEMBL2id)
-nrow(ensEMBL2id)
-
 
 message("+-------------------------------------------------------------------------------")
 message("+ Retrieve average transcript lengths")
 message("+-------------------------------------------------------------------------------")
-
 # From: http://seqanswers.com/forums/archive/index.php/t-39797.html
 
-library(GenomicRanges)
-library(rtracklayer)
-
-GTFfile                               <- "/usr/local/Genomes/Mus_musculus/GRCm38/Mus_musculus.GRCm38.84.gtf"
 GTF                                   <- import.gff(GTFfile, format="gtf", genome="GRCm38.84", feature.type="exon")
 grl                                   <- reduce(split(GTF, elementMetadata(GTF)$gene_id))
 reducedGTF                            <- unlist(grl, use.names=T)
@@ -137,11 +164,11 @@ nrow(ensEMBL2id)
 message("+-------------------------------------------------------------------------------")
 message("+ Create ddsHTSeq object")
 message("+-------------------------------------------------------------------------------")
+
 ddsHTSeq.group      <- DESeqDataSetFromHTSeqCount(sampleTable=sampleTable, directory=HTSeq.dir, design= ~ group) 
 ddsHTSeq.tissuecell <- DESeqDataSetFromHTSeqCount(sampleTable=sampleTable, directory=HTSeq.dir, design= ~ tissue + cell)
 ddsHTSeq.collated1  <- DESeqDataSetFromHTSeqCount(sampleTable=sampleTable, directory=HTSeq.dir, design= ~ collated1)
 ddsHTSeq.collated2  <- DESeqDataSetFromHTSeqCount(sampleTable=sampleTable, directory=HTSeq.dir, design= ~ collated2)
-
 ddsHTSeq.tissue     <- DESeqDataSetFromHTSeqCount(sampleTable=sampleTable, directory=HTSeq.dir, design= ~ tissue)
 
 
@@ -204,8 +231,7 @@ head(normCounts.group.df.annot)
 write.csv(normCounts.group.df.annot, file=paste(Project, "NormalisedCounts_normCounts.group.csv", sep=""))
 
 
-significance=0.05
-foldchange=2
+
 
 
 message("+-------------------------------------------------------------------------------")
@@ -214,22 +240,22 @@ message("+----------------------------------------------------------------------
 
 res_uterus_vs_liver                        <- results(dds.tissuecell, contrast=c("tissue", "uterus", "liver"))
 
-res_uterus_cNK_vs_uterus_trNK              <- results(dds.group,      contrast=c("group", "cNKuterus",  "trNKuterus")) # 7a
-res_uterus_trNK_vs_uterus_cNK              <- results(dds.group,      contrast=c("group", "trNKuterus", "cNKuterus" )) # 7b
+res_uterus_cNK_vs_uterus_trNK              <- results(dds.group,      contrast=c("group", "cNKuterus",  "trNKuterus")) 
+res_uterus_trNK_vs_uterus_cNK              <- results(dds.group,      contrast=c("group", "trNKuterus", "cNKuterus" )) 
 
-res_uterus_cNK_vs_uterus_ILC1              <- results(dds.group,      contrast=c("group", "cNKuterus",  "ILC1uterus")) # 6
-res_uterus_ILC1_vs_uterus_trNK             <- results(dds.group,      contrast=c("group", "ILC1uterus", "trNKuterus")) # 10
+res_uterus_cNK_vs_uterus_ILC1              <- results(dds.group,      contrast=c("group", "cNKuterus",  "ILC1uterus")) 
+res_uterus_ILC1_vs_uterus_trNK             <- results(dds.group,      contrast=c("group", "ILC1uterus", "trNKuterus")) 
 
-res_liver_cNK_vs_liver_ILC1                <- results(dds.group,      contrast=c("group", "cNKliver",   "ILC1liver" )) # 2
+res_liver_cNK_vs_liver_ILC1                <- results(dds.group,      contrast=c("group", "cNKliver",   "ILC1liver" )) 
 
-res_uterus_cNK_vs_liver_cNK                <- results(dds.group,      contrast=c("group", "cNKuterus",  "cNKliver"  )) # 1
-res_uterus_ILC1_vs_liver_ILC1              <- results(dds.group,      contrast=c("group", "ILC1uterus", "ILC1liver" )) # 8
+res_uterus_cNK_vs_liver_cNK                <- results(dds.group,      contrast=c("group", "cNKuterus",  "cNKliver"  )) 
+res_uterus_ILC1_vs_liver_ILC1              <- results(dds.group,      contrast=c("group", "ILC1uterus", "ILC1liver" )) 
 
-res_uterus_trNK_vs_liver_ILC1              <- results(dds.group,      contrast=c("group", "trNKuterus", "ILC1liver" )) # 9
-res_uterus_trNK_vs_liver_cNK               <- results(dds.group,      contrast=c("group", "trNKuterus", "cNKliver"  )) # 4
+res_uterus_trNK_vs_liver_ILC1              <- results(dds.group,      contrast=c("group", "trNKuterus", "ILC1liver" )) 
+res_uterus_trNK_vs_liver_cNK               <- results(dds.group,      contrast=c("group", "trNKuterus", "cNKliver"  )) 
 
-res_liver_cNK_vs_liver_ILC1                <- results(dds.group,      contrast=c("group", "cNKliver",   "ILC1liver" )) # 5
-res_uterus_cNK_vs_liver_ILC1               <- results(dds.group,      contrast=c("group", "cNKuterus",  "ILC1liver" )) # 3
+res_liver_cNK_vs_liver_ILC1                <- results(dds.group,      contrast=c("group", "cNKliver",   "ILC1liver" )) 
+res_uterus_cNK_vs_liver_ILC1               <- results(dds.group,      contrast=c("group", "cNKuterus",  "ILC1liver" )) 
 
 res_uterus_trNK_uterus_ILC1_vs_liver_ILC1  <- results(dds.collated1,  contrast=c("collated1", "utrNK_uILC1", "lILC1"))
 res_uterus_ILC1_uterus_trNK_vs_uterus_cNK  <- results(dds.collated2,  contrast=c("collated2", "uILC1_utrNK", "ucNK"))
@@ -290,138 +316,86 @@ res_uterus_ILC1_uterus_trNK_vs_uterus_cNK.ann  <- functionGetSigDEG(as.data.fram
 
 
 
-
-
-#head(res_uterus_vs_liver.ann[order(abs(res_uterus_vs_liver.ann$log2FoldChange),decreasing=TRUE),], 20)
-#test <- as.data.frame( head(results(dds.tissuecell, contrast=c("tissue", "uterus", "liver")), 20) )
-#for(i in rownames(test)){ print(i) }
-
 message("+-------------------------------------------------------------------------------")
 message("+ Create MA Plots")
 message("+-------------------------------------------------------------------------------")
 
-
-
 favoritegenesA <- NULL
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000021477") #Ctsl
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000038642") #Ctss
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000021939") #Ctsb
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000024621") #Csf1r
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000073421") #H2-Ab1
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000036594") #H2-Aa
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000024610") #Cd74
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000046805") #Mpeg1
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000069516") #Lyz2
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000004207") #Psap
-favoritegenesA <- append(favoritegenesA, "ENSMUSG00000019122") #Ccl9
+favoritegenesA <- append(favoritegenesA, "ENSMUSG00000031375") #Bgn
+favoritegenesA <- append(favoritegenesA, "ENSMUSG00000025473") #Adam8
+favoritegenesA <- append(favoritegenesA, "ENSMUSG00000035385") #Ccl2
+favoritegenesA <- append(favoritegenesA, "ENSMUSG00000056529") #Ptafr
+favoritegenesA <- append(favoritegenesA, "ENSMUSG00000036006") #Fam65b
+favoritegenesA <- append(favoritegenesA, "ENSMUSG00000027009") #Itga4
 
 favoritegenesB <- NULL
-favoritegenesB <- append(favoritegenesB, "ENSMUSG00000023132") #Gzma	
-favoritegenesB <- append(favoritegenesB, "ENSMUSG00000015441") #Gzmf
-favoritegenesB <- append(favoritegenesB, "ENSMUSG00000059256") #Gzmd
-favoritegenesB <- append(favoritegenesB, "ENSMUSG00000040284") #Gzmg
-favoritegenesB <- append(favoritegenesB, "ENSMUSG00000022156") #Gzme
-favoritegenesB <- append(favoritegenesB, "ENSMUSG00000079186") #Gzmc
+favoritegenesB <- append(favoritegenesB, "ENSMUSG00000027765") #P2ry1   
+favoritegenesB <- append(favoritegenesB, "ENSMUSG00000029470") #P2rx4
+favoritegenesB <- append(favoritegenesB, "ENSMUSG00000029832") #Nfe2l3
+favoritegenesB <- append(favoritegenesB, "ENSMUSG00000015839") #Nfe2l2
+favoritegenesB <- append(favoritegenesB, "ENSMUSG00000025993") #Slc40a1
 
 favoritegenesC <- NULL
-favoritegenesC <- append(favoritegenesC, "ENSMUSG00000029304") #Spp1
-favoritegenesC <- append(favoritegenesC, "ENSMUSG00000035493") #Tgfbi
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000021423") #Ly86
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000044827") #Tlr1
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000027995") #Tlr2
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000040522") #Tlr8
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000045322") #Tlr9
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000024164") #C3
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000031443") #F7
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000031444") #F10
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000025314") #Ptprj
 favoritegenesC <- append(favoritegenesC, "ENSMUSG00000040552") #C3ar1
+favoritegenesC <- append(favoritegenesC, "ENSMUSG00000049130") #C5ar1
 
 favoritegenesD <- NULL
-favoritegenesD <- append(favoritegenesD, "ENSMUSG00000035042") #Ccl5
+favoritegenesD <- append(favoritegenesD, "ENSMUSG00000021822") #Plau
+favoritegenesD <- append(favoritegenesD, "ENSMUSG00000025856") #Pdgfa
+favoritegenesD <- append(favoritegenesD, "ENSMUSG00000027200") #Sema6D
+favoritegenesD <- append(favoritegenesD, "ENSMUSG00000020689") #Itgb3
+favoritegenesD <- append(favoritegenesD, "ENSMUSG00000021796") #Bmpr1a
+
+megafavorite <- NULL
+megafavorite <- append(megafavorite, favoritegenesA)
+megafavorite <- append(megafavorite, favoritegenesB)
+megafavorite <- append(megafavorite, favoritegenesC)
+megafavorite <- append(megafavorite, favoritegenesD)
 
 
-functionCustomMAPlot <- function(results, Project, Title, significance, log2FoldChange, favoritegenesA, favouritegenesB, favouritegenesC, favouritegenesD) {
+functionCustomMAPlot.1colour <- function(results, Project, FigureID, Title, significance, log2FoldChange, xfavoritegenes) {
   # Get annotation infor for a favorite set of ensEMBL ids
-  labeldata.rows            <- match(favoritegenesA, row.names(results))
+  labeldata.rows            <- match(xfavoritegenes, row.names(results))
   labeldata                 <- results[labeldata.rows,]
   labeldata$ensembl_gene_id <- rownames(labeldata)
   labeldata.ann             <- merge(labeldata, ensEMBL2id, by="ensembl_gene_id")
   
-  labeldataB.rows            <- match(favoritegenesB, row.names(results))
-  labeldataB                 <- results[labeldataB.rows,]
-  labeldataB$ensembl_gene_id <- rownames(labeldataB)
-  labeldataB.ann             <- merge(labeldataB, ensEMBL2id, by="ensembl_gene_id")
-  
-  labeldataC.rows            <- match(favoritegenesC, row.names(results))
-  labeldataC                 <- results[labeldataC.rows,]
-  labeldataC$ensembl_gene_id <- rownames(labeldataC)
-  labeldataC.ann             <- merge(labeldataC, ensEMBL2id, by="ensembl_gene_id")
-  
-  labeldataD.rows            <- match(favoritegenesD, row.names(results))
-  labeldataD                 <- results[labeldataD.rows,]
-  labeldataD$ensembl_gene_id <- rownames(labeldataD)
-  labeldataD.ann             <- merge(labeldataD, ensEMBL2id, by="ensembl_gene_id")
-  
   results$log2FoldChange[results$log2FoldChange > 12.5]  <- 12.5
   results$log2FoldChange[results$log2FoldChange < -12.5] <- -12.5
   
-  plt <- ggplot(data = results, aes(x=baseMean, y=log2FoldChange )) + 
-    geom_abline(intercept = log2FoldChange, slope = 0, colour='red', alpha=0.25) + 
+  plt <- ggplot(data = results, aes(x=baseMean, y=log2FoldChange )) +
+    geom_abline(intercept = log2FoldChange, slope = 0, colour='red', alpha=0.25) +
     geom_abline(intercept = -log2FoldChange, slope = 0, colour='red', alpha=0.25) +
     geom_point(size=0.5, alpha=0.5, col="black") +
     geom_point(data=subset(results, (padj <= significance & log2FoldChange >= 0)), size=1, alpha=0.5,  col="red") +
     geom_point(data=subset(results, (padj <= significance & log2FoldChange < 0)),  size=1, alpha=0.5,  col="blue") +
-    
     geom_point(data=subset(labeldata.ann, log2FoldChange > 0), aes( x=baseMean, y=log2FoldChange), size=1.25, alpha=1.0, color='darkred',  shape=21, stroke=0.5) +
     geom_point(data=subset(labeldata.ann, log2FoldChange < 0), aes( x=baseMean, y=log2FoldChange), size=1.25, alpha=1.0, color='darkblue', shape=21, stroke=0.5) +
     
-    geom_point(data=labeldataB.ann, aes( x=baseMean, y=log2FoldChange), size=3, alpha=1.0, color='pink', shape=21, stroke=0.5) +
-    geom_point(data=labeldataB.ann, aes( x=baseMean, y=log2FoldChange), size=1, alpha=1.0, color='pink', stroke=0.5) +
-    
-    geom_point(data=labeldataC.ann, aes( x=baseMean, y=log2FoldChange), size=3, alpha=1.0, color='orange', shape=21, stroke=0.5) +
-    geom_point(data=labeldataC.ann, aes( x=baseMean, y=log2FoldChange), size=1, alpha=1.0, color='orange', stroke=0.5) +
-    
-    geom_point(data=labeldataD.ann, aes( x=baseMean, y=log2FoldChange), size=3, alpha=1.0, color='blue', shape=21, stroke=0.5) +
-    geom_point(data=labeldataD.ann, aes( x=baseMean, y=log2FoldChange), size=1, alpha=1.0, color='blue', stroke=0.5) +
-    
-    
-    geom_label_repel(data=subset(labeldata.ann, log2FoldChange > 0), 
-                     aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
-                     fill='red', colour='white', point.padding = unit(0.25, "lines"),  size=6, segment.color = 'darkred',  nudge_x = 1) +
-    geom_label_repel(data=subset(labeldata.ann, log2FoldChange < 0), 
-                     aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
-                     fill='blue', colour='white', point.padding = unit(0.25, "lines"), size=6, segment.color = 'darkblue', nudge_x = -1) +
-    
-    geom_label_repel(data=labeldataB.ann, 
-                     aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
-                     fill='pink', colour='white', point.padding = unit(0.25, "lines"),  size=6, segment.color = 'pink',  nudge_x = -2) +
-    
-    geom_label_repel(data=labeldataC.ann, 
-                     aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
-                     fill='orange', colour='white', point.padding = unit(0.25, "lines"),  size=6, segment.color = 'orange',  nudge_x = -3) +
-    
-    geom_label_repel(data=labeldataD.ann, 
-                     aes( x=baseMean, y=log2FoldChange, label=external_gene_name), 
-                     fill='blue', colour='white', point.padding = unit(0.25, "lines"),  size=6, segment.color = 'blue',  nudge_x = 2) +
-    
-    scale_x_log10() + 
-    #scale_y_reverse() +
-    xlab("Mean Normalised Read Count") + ylab("log2 Fold Change") + ggtitle(paste(Project, " DESeq2 MA ", Title, " [fc ", log2FoldChange, ", sig ", significance, "]", sep="")) 
+    geom_label_repel(data=labeldata.ann,
+                     aes( x=baseMean, y=log2FoldChange, label=external_gene_name),
+                     fill='gray', colour='black', point.padding = unit(0.25, "lines"),  size=6, segment.size = 1, segment.color = 'darkred',  nudge_x = 0, nudge_y=0) +
+    scale_x_log10() +
+    xlab("Mean Normalised Read Count") + ylab("log2 Fold Change") + ggtitle(paste(Project, " ", FigureID, "\n", Title, " [fc ", log2FoldChange, ", sig ", significance, "]", sep=""))
   
-  pdf(paste(Project, "_DESeq_MA_", Title, "_fc", log2FoldChange, "_sig", significance, ".pdf", sep=""),width=10,height=7, onefile=FALSE)
+  pdf(paste(Project, "_", FigureID, ".pdf", sep=""),width=10,height=7, onefile=FALSE)
   par(bg=NA)
   print({ plt })
   dev.off()
+  return (plt)
 }
 
+SuppFig.S3A <- functionCustomMAPlot.1colour(as.data.frame(res_uterus_trNK_vs_uterus_cNK), Project, "SuppFig.S3A", "res_uterus_trNK_vs_uterus_cNK", significance, foldchange, megafavorite)
 
-#functionCustomMAPlot(as.data.frame(res_uterus_vs_liver),                         Project, "res_uterus_vs_liver",                        significance, foldchange, favoritegenes)
-functionCustomMAPlot(as.data.frame(res_uterus_cNK_vs_uterus_trNK),               Project, "res_uterus_cNK_vs_uterus_trNK",              significance, foldchange, favoritegenesA, favoritegenesB, favouritegenesC, favouritegenesD)
-functionCustomMAPlot(as.data.frame(res_uterus_trNK_vs_uterus_cNK),               Project, "res_uterus_trNK_vs_uterus_cNK",              significance, foldchange, favoritegenesA, favoritegenesB, favouritegenesC, favouritegenesD)
-
-#functionCustomMAPlot(as.data.frame(res_uterus_cNK_vs_uterus_ILC1),               Project, "res_uterus_cNK_vs_uterus_ILC1",              significance, foldchange, favoritegenes)
-#functionCustomMAPlot(as.data.frame(res_uterus_ILC1_vs_uterus_trNK),              Project, "res_uterus_ILC1_vs_uterus_trNK",             significance, foldchange, favoritegenes)
-#functionCustomMAPlot(as.data.frame(res_liver_cNK_vs_liver_ILC1),                 Project, "res_liver_cNK_vs_liver_ILC1",                significance, foldchange, favoritegenes)
-#functionCustomMAPlot(as.data.frame(res_uterus_cNK_vs_liver_cNK),                 Project, "res_uterus_cNK_vs_liver_cNK",                significance, foldchange, favoritegenes)
-#functionCustomMAPlot(as.data.frame(res_uterus_ILC1_vs_liver_ILC1),               Project, "res_uterus_ILC1_vs_liver_ILC1",              significance, foldchange, favoritegenes)
-
-#functionCustomMAPlot(as.data.frame(res_uterus_trNK_vs_liver_ILC1),               Project, "res_uterus_trNK_vs_liver_ILC1",              significance, foldchange, favoritegenes)
-#functionCustomMAPlot(as.data.frame(res_uterus_trNK_vs_liver_cNK),                Project, "res_uterus_trNK_vs_liver_cNK",               significance, foldchange, favoritegenes)
-
-#functionCustomMAPlot(as.data.frame(res_uterus_trNK_uterus_ILC1_vs_liver_ILC1),   Project, "res_uterus_trNK_uterus_ILC1_vs_liver_ILC1",  significance, foldchange, favoritegenes)
-#functionCustomMAPlot(as.data.frame(res_uterus_ILC1_uterus_trNK_vs_uterus_cNK),   Project, "res_uterus_ILC1_uterus_trNK_vs_uterus_cNK",  significance, foldchange, favoritegenes)
 
 
 
@@ -429,37 +403,26 @@ message("+----------------------------------------------------------------------
 message("+ UpSetR")
 message("+-------------------------------------------------------------------------------")
 
-listInput <- list( 'uterus vs liver'                        = res_uterus_vs_liver.ann$ensembl_gene_id, 
-                   'uterus cNK vs uterus trNK'              = res_uterus_cNK_vs_uterus_trNK.ann$ensembl_gene_id, 
-                   'uterus cNK vs uterus ILC1'              = res_uterus_cNK_vs_uterus_ILC1.ann$ensembl_gene_id,
-                   'uterus ILC1 vs uterus trNK'             = res_uterus_ILC1_vs_uterus_trNK.ann$ensembl_gene_id,
-                   'liver cNK vs liver ILC1'                = res_liver_cNK_vs_liver_ILC1.ann$ensembl_gene_id,
-                   'uterus cNK vs liver cNK'                = res_uterus_cNK_vs_liver_cNK.ann$ensembl_gene_id,
-                   'uterus ILC1 vs liver ILC1'              = res_uterus_ILC1_vs_liver_ILC1.ann$ensembl_gene_id,
-                   'uterus trNK vs liver ILC1'              = res_uterus_trNK_vs_liver_ILC1.ann$ensembl_gene_id,
-                   'uterus trNK vs liver cNK'               = res_uterus_trNK_vs_liver_cNK.ann$ensembl_gene_id,
-                   'uterus trNK and uterus ILC1 vs liver ILC1'  = res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.ann$ensembl_gene_id,
-                   'uterus ILC1 and uterus trNK vs uterus cNK'  = res_uterus_ILC1_uterus_trNK_vs_uterus_cNK.ann$ensembl_gene_id
-                 )
-
 
 listInput <- list("uterus vs liver"                         = res_uterus_vs_liver.ann$ensembl_gene_id,
+                  'uterine trNK and ILC1 vs liver ILC1'     = res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.ann$ensembl_gene_id,
+                  'uterine trNK and ILC1 vs uterine cNK'    = res_uterus_ILC1_uterus_trNK_vs_uterus_cNK.ann$ensembl_gene_id,
                   'uterine trNK vs uterine cNK'             = res_uterus_cNK_vs_uterus_trNK.ann$ensembl_gene_id,
-                  'uterine ILC1 vs uterine cNK'             = res_uterus_cNK_vs_uterus_ILC1.ann$ensembl_gene_id,
                   'uterine ILC1 vs uterine trNK'            = res_uterus_ILC1_vs_uterus_trNK.ann$ensembl_gene_id,
+                  'uterine ILC1 vs uterine cNK'             = res_uterus_cNK_vs_uterus_ILC1.ann$ensembl_gene_id,
                   'liver ILC1 vs liver cNK'                 = res_liver_cNK_vs_liver_ILC1.ann$ensembl_gene_id,
                   'uterine cNK vs liver cNK'                = res_uterus_cNK_vs_liver_cNK.ann$ensembl_gene_id,
                   'uterine ILC1 vs liver ILC1'              = res_uterus_ILC1_vs_liver_ILC1.ann$ensembl_gene_id,
                   'uterine trNK vs liver ILC1'              = res_uterus_trNK_vs_liver_ILC1.ann$ensembl_gene_id,
-                  'uterine trNK vs liver cNK'               = res_uterus_trNK_vs_liver_cNK.ann$ensembl_gene_id,
-                  'uterine trNK and ILC1 vs liver ILC1'     = res_uterus_trNK_uterus_ILC1_vs_liver_ILC1.ann$ensembl_gene_id,
-                  'uterine trNK and ILC1 vs uterine cNK'    = res_uterus_ILC1_uterus_trNK_vs_uterus_cNK.ann$ensembl_gene_id
-                 )
+                  'uterine trNK vs liver cNK'               = res_uterus_trNK_vs_liver_cNK.ann$ensembl_gene_id
+                )
 
-pdf(paste(Project, "_DESeq_UpSetR.pdf", sep=""),width=10,height=7, onefile=FALSE)
+
+
+pdf(paste(Project, "_Fig.3A.pdf", sep=""),width=10,height=7, onefile=FALSE)
 par(bg=NA)
-upset(fromList(listInput), nsets = 11, sets = rev(colnames(fromList(listInput))), keep.order = TRUE, empty.intersections = "on", 
-      nintersects = 11, sets.bar.color = rev(c("blue", "blue", "blue", "green", "green", "red", "red", "red", "red", "red", "red")), 
+upset(fromList(listInput), nsets = 11, sets = rev(colnames(fromList(listInput))), 
+      keep.order = TRUE, empty.intersections = "on", nintersects = 11, 
       sets.x.label = "Number of differentially expressed genes", mainbar.y.label = "Intersections of Differentially Expressed Genes")
 dev.off()
 
@@ -572,77 +535,11 @@ message("+----------------------------------------------------------------------
 message("+ Create some pHeatMaps")
 message("+-------------------------------------------------------------------------------")
 
-
-# #res_uterus_vs_liver.ann
-# 
-# # Most variable
-# #topVarGenes            <- head(order(rowVars(assay(rld.tissue)),decreasing=TRUE),200)
-# #mat                    <- assay(rld.group)[ topVarGenes, ]
-# 
-# # Favourites
-# mat <- assay(rld.group)[ favoritegenesA, ]
-# 
-# #mat <- res_uterus_vs_liver[ favoritegenesA, ]
-# 
-# mat                    <- mat - rowMeans(mat)
-# df                     <- as.data.frame(colData(rld.group)[,c("cell", "tissue")])
-# mat.df                 <- as.data.frame(mat)
-# mat.df$ensembl_gene_id <- rownames(mat.df)
-# mat.ann                <- merge(mat.df, ensEMBL2id, by="ensembl_gene_id")
-# rownames(mat.ann)      <- mat.ann$external_gene_name
-# #mat.ann                <- mat.ann[order(sapply(mat.ann$ensembl_gene_id, function(x) which(x == favoritegenesA))), ]
-# mat.ann                <- within(mat.ann, rm("ensembl_gene_id", "external_gene_name", "description", "entrezgene", "chromosome_name", "gene_biotype", "Length"))
-# matrix                 <- as.matrix(mat.ann)
-# 
-# 
-# #ScaleCols <- colorRampPalette(colors = c("red3","white","royalblue4"))(255)
-# ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(255)
-# AnnotCols <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"))
-# 
-# #pdf(paste(Project, "_DESeq_pHeatMap_rldgroup.pdf", sep=""), width=10,height=7, onefile=FALSE)
-# #par(bg=NA)
-# pheatmap(matrix, cluster_rows=FALSE, show_rownames=TRUE, cluster_cols=TRUE, annotation_col=df, annotation_colors=AnnotCols, col=ScaleCols, main=paste(Project, " DESeq2 pHeatMap rld.tissue", sep=""))
-# #dev.off()
-
-# #
-# # By Log Fold Change
-# #
-# logFoldChanceCutOff <- 2.5
-# 
-# res_uterus_vs_liver.ann.bylfc     <- res_uterus_vs_liver.ann[ order( - abs(res_uterus_vs_liver.ann$log2FoldChange) ), ] 
-# res_uterus_vs_liver.ann.toplfc    <-  res_uterus_vs_liver.ann.bylfc[ !(is.na(res_uterus_vs_liver.ann.bylfc$log2FoldChange)) & 
-#                                                                    (abs(res_uterus_vs_liver.ann.bylfc$log2FoldChange) >= logFoldChanceCutOff) & 
-#                                                                   !(is.na(res_uterus_vs_liver.ann.bylfc$padj)) & 
-#                                                                    (res_uterus_vs_liver.ann.bylfc$padj <= significance), ] 
-# 
-# rows                    <- match(res_uterus_vs_liver.ann.toplfc$ensembl_gene_id, row.names(rld.tissue))
-# mat2                    <- assay(rld.tissue)[rows,]
-# df2                     <- as.data.frame(colData(rld.tissue)[,c("cell", "tissue")])
-# mat2.df                 <- as.data.frame(mat2)
-# mat2.df$ensembl_gene_id <- rownames(mat2.df)
-# mat2.ann                <- merge(mat2.df, ensEMBL2id, by="ensembl_gene_id")
-# rownames(mat2.ann)      <- mat2.ann$external_gene_name
-# mat2.ann                <- within(mat2.ann, rm("ensembl_gene_id", "external_gene_name", "description", "entrezgene", "chromosome_name", "gene_biotype", "Length"))
-# matrix2                 <- as.matrix(mat2.ann)
-# 
-# ScaleCols <- colorRampPalette(colors = c("red3","white","royalblue4"))(255)
-# ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(255)
-# AnnotCols <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"))
-# 
-# pdf(paste0(Project, "_DESeq_pHeatMap_rld.tissue_lfc.", logFoldChanceCutOff, "_sig.", significance,  ".pdf"), width=10,height=7, onefile=FALSE)
-# par(bg=NA)
-# pheatmap(matrix2, cluster_rows=TRUE, show_rownames=FALSE, cluster_cols=TRUE, annotation_col=df2, col=ScaleCols, annotation_colors=AnnotCols, main=paste(Project, " DESeq2 pHeatMap rld.tissue log2FC=", logFoldChanceCutOff, " padj=", significance,  sep=""))
-# dev.off()
-
-
-
-
-
-
+# Set scale range to be consistent across all custom pHeatMaps
 breaksList = seq(-0.2, 16, by = 1)
 
 #------------------------------------------------------------------------------
-# Heatmap 
+# Heatmap 3B
 # Comparison 1: res_uterus_vs_liver
 #------------------------------------------------------------------------------
 
@@ -672,30 +569,27 @@ mat2.ann.means         <- mat2.ann
 mat2.ann.means$uterus  <- rowMeans(subset(mat2.ann, select = c("01","02","06","07","08","12","13")), na.rm = TRUE)
 mat2.ann.means$liver   <- rowMeans(subset(mat2.ann, select = c("04","05","09","10","14","15")), na.rm = TRUE)
 mat2.ann.means         <- mat2.ann.means[ , c("uterus","liver") ]
+matrix2                <- as.matrix(mat2.ann)
+matrix2.means          <- as.matrix(mat2.ann.means)
 
-matrix2                 <- as.matrix(mat2.ann)
-matrix2.means           <- as.matrix(mat2.ann.means)
-
-
-#ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
-ScaleCols <- colorRampPalette(colors = c("red","white","blue"))(length(breaksList))
+ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
 AnnotCols <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"))
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.tissue_res_uterus_vs_liver_CustomList.pdf"), width=7.5,height=12.5, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3B.allsamples.pdf"), width=7.5,height=12.5, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2, breaks = breaksList, cluster_rows=TRUE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, col=ScaleCols, cutree_cols=3, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.tissue/res_uterus_vs_liver"))
+pheatmap(matrix2, breaks = breaksList, cluster_rows=TRUE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, col=ScaleCols, cutree_cols=3, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.tissue/res_uterus_vs_liver"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.tissue_res_uterus_vs_liver_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3B.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.tissue/res_uterus_vs_liver"))
+pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.tissue/res_uterus_vs_liver"))
 dev.off()
 
 
 
 
 #------------------------------------------------------------------------------
-# Heatmap 
+# Heatmap 3C
 # Comparison 2: res_uterus_trNK_uterus_ILC1_vs_liver_ILC1
 # c("02", "04", "07", "08", "09", "12", "13", "14")
 #------------------------------------------------------------------------------
@@ -734,26 +628,25 @@ mat2.ann                   <- mat2.ann[, c("02", "04", "07", "08", "09", "12", "
 matrix2                    <- as.matrix(mat2.ann)
 matrix2.means              <- as.matrix(mat2.ann.means)
 
-#ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
-ScaleCols <- colorRampPalette(colors = c("red","white","blue"))(length(breaksList))
+ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
 AnnotCols       <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_trNK_ILC1"="#0099FF", "liver_ILC1"="#EA5160"))
 AnnotCols.means <- list( tissue=c("liver"="lightgrey", "uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"), Group=c("uterus_trNK_ILC1"="#0099FF", "liver_ILC1"="#EA5160"))
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_trNK_uterus_ILC1_vs_liver_ILC1_CustomList.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3C.allsamples.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_trNK_uterus_ILC1_vs_liver_ILC1"))
+pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.group/res_uterus_trNK_uterus_ILC1_vs_liver_ILC1"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_trNK_uterus_ILC1_vs_liver_ILC1_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3C.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_trNK_uterus_ILC1_vs_liver_ILC1"))
+pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.group/res_uterus_trNK_uterus_ILC1_vs_liver_ILC1"))
 dev.off()
 
 
 
 
 #------------------------------------------------------------------------------
-# Heatmap 
+# Heatmap 3D
 # Comparison 3: res_uterus_ILC1_uterus_trNK_vs_uterus_cNK
 #  c("08","13",  "02","07","12",  "01","06")
 #------------------------------------------------------------------------------
@@ -793,25 +686,24 @@ mat2.ann                   <- mat2.ann[, c("08","13",  "02","07","12",  "01","06
 matrix2                    <- as.matrix(mat2.ann)
 matrix2.means              <- as.matrix(mat2.ann.means)
 
-#ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
-ScaleCols <- colorRampPalette(colors = c("red","white","blue"))(length(breaksList))
+ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
 AnnotCols       <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_ILC1_trNK"="#0099FF", "uterus_cNK"="#FFCC00"))
 AnnotCols.means <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_ILC1_trNK"="#0099FF", "uterus_cNK"="#FFCC00"))
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_uterus_trNK_vs_uterus_cNK_CustomList.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3D.allsamples.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2, breaks = breaksList, cluster_rows=TRUE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
+pheatmap(matrix2, breaks = breaksList, cluster_rows=TRUE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_uterus_trNK_vs_uterus_cNK_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3D.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
+pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.group/res_uterus_ILC1_uterus_trNK_vs_uterus_cNK"))
 dev.off()
 
 
 
 #------------------------------------------------------------------------------
-# Heatmap 
+# Heatmap 3E
 # Comparison 4: res_uterus_cNK_vs_uterus_trNK
 #  c("01", "06",  "02", "07", "12")
 #------------------------------------------------------------------------------
@@ -846,25 +738,24 @@ mat2.ann                   <- mat2.ann[, c("01", "06",  "02", "07", "12")]
 matrix2                    <- as.matrix(mat2.ann)
 matrix2.means              <- as.matrix(mat2.ann.means)
 
-#ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
-ScaleCols <- colorRampPalette(colors = c("red","white","blue"))(length(breaksList))
+ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
 AnnotCols       <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "trNK"="#0099FF"))
 AnnotCols.means <- list( tissue=c("uterus"="darkgrey"),  cell = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_trNK"="#0099FF","uterus_cNK"="#FFCC00"))
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_cNK_vs_uterus_trNK_CustomList.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3E.allsamples.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_cNK_vs_uterus_trNK"))
+pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.group/res_uterus_cNK_vs_uterus_trNK"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_cNK_vs_uterus_trNK_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3E.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, fontsize=18, cellheight = 20, main=paste0(Project, " custom", "\nrld.group/res_uterus_cNK_vs_uterus_trNK"))
+pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, fontsize=18, cellheight = 20, main=paste0(Project, "\nrld.group/res_uterus_cNK_vs_uterus_trNK"))
 dev.off()
 
 
 
 #------------------------------------------------------------------------------
-# Heatmap 
+# Heatmap 3F
 # Comparison 5: res_uterus_ILC1_vs_uterus_trNK
 #  c("08","13",  "02", "07", "12")
 #------------------------------------------------------------------------------
@@ -899,34 +790,22 @@ mat2.ann                   <- mat2.ann[, c("08","13",  "02", "07", "12")]
 matrix2                    <- as.matrix(mat2.ann)
 matrix2.means              <- as.matrix(mat2.ann.means)
 
-#ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
-ScaleCols <- colorRampPalette(colors = c("red","white","blue"))(length(breaksList))
+ScaleCols <- colorRampPalette(colors = c("yellow","red","black"))(length(breaksList))
 AnnotCols       <- list( tissue=c("uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"))
 AnnotCols.means <- list( tissue=c("uterus"="darkgrey"),  cell = c("ILC1"="#EA5160", "trNK"="#0099FF"), Comparison=c("uterus_trNK"="#0099FF","uterus_ILC1"="#EA5160"))
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_vs_uterus_trNK_CustomList.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3E.allsamples.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=3, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_vs_uterus_trNK"))
+pheatmap(matrix2, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2, cutree_cols=3, col=ScaleCols, annotation_colors=AnnotCols, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.group/res_uterus_ILC1_vs_uterus_trNK"))
 dev.off()
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_res_uterus_ILC1_vs_uterus_trNK_CustomList_means.pdf"), width=7.5,height=10, onefile=FALSE)
+pdf(paste0(Project, "_Fig.3E.pdf"), width=7.5,height=10, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, " custom", "\nrld.group/res_uterus_ILC1_vs_uterus_trNK"))
+pheatmap(matrix2.means, breaks = breaksList, cluster_rows=FALSE, show_rownames=TRUE, show_colnames = FALSE, cluster_cols=TRUE, annotation_col=df2.means, cutree_cols=2, col=ScaleCols, annotation_colors=AnnotCols.means, cellwidth = 20, cellheight = 20, fontsize=18, main=paste0(Project, "\nrld.group/res_uterus_ILC1_vs_uterus_trNK"))
 dev.off()
-
-
-
-
-
-
-
-
-
-
-
 
 #
-# Pairwise group comaprisons
+# pHeatMap Figure 2A
 #
 
 logFoldChanceCutOff <- 5
@@ -969,12 +848,12 @@ matrix3                 <- as.matrix(mat3.ann)
 
 colors<-colorRampPalette(rev(brewer.pal(n=11,name="RdBu")))(255)
 
-pdf(paste0(Project, "_DESeq_pHeatMap_rld.group_pairwiseDEGs_lfc.", logFoldChanceCutOff, "_sig.", significance,  ".pdf"), width=10,height=7, onefile=FALSE)
+pdf(paste0(Project, "_Fig.2A",  ".pdf"), width=10,height=7, onefile=FALSE)
 par(bg=NA)
-pheatmap(matrix3, cluster_rows=TRUE, show_rownames=FALSE, cluster_cols=TRUE, annotation_col=df3, 
+pheatmap(matrix3, cluster_rows=TRUE, show_rownames=FALSE, show_colnames=FALSE, cluster_cols=TRUE, annotation_col=df3, 
          annotation_colors=list(tissue=c(liver="lightgrey",uterus="darkgrey"), cell=c(cNK="orange", ILC1="firebrick3", trNK="steelblue3")),
          cutree_cols=6, border_color="white",
-         col=colors, main=paste(Project, " DESeq2 pHeatMap rld.groups log2FC=", logFoldChanceCutOff, " padj=", significance,  sep=""))
+         col=colors, main=paste(Project, " pHeatMap \nrld.groups [log2FC=", logFoldChanceCutOff, " padj=", significance, "]",  sep=""))
 dev.off()
 
 
@@ -1000,7 +879,7 @@ pc2lab <- paste0("PC2 (",as.character(pc2var),"%)")
 
 scores <- data.frame(sampleFiles=sampleTable$fileName, pca$x, sampleCell=sampleTable$cell, sampleName=sampleTable$sampleName, sampleTissue=sampleTable$tissue)
 
-pdf(paste(Project, "_DESeq2_Annotated_PCA_All_nolabels.pdf", sep=""),width=10,height=7)
+pdf(paste(Project, "_Fig.2B.pdf", sep=""),width=10,height=7)
 par(bg=NA)
   ggplot(data=scores, 
          aes(x = scores$PC1, y = scores$PC2, col = factor(scores$sampleCell), shape=(factor(scores$sampleTissue)), 
@@ -1013,14 +892,16 @@ par(bg=NA)
   theme(text = element_text(size=elementTextSize)) 
 dev.off()
 
-pdf(paste(Project, "_DESeq2_Annotated_PCA_All_labels.pdf", sep=""),width=10,height=7)
+pdf(paste(Project, "_Fig.2B.labels.pdf", sep=""),width=10,height=7)
 par(bg=NA)
 ggplot(data=scores, 
        aes(x = scores$PC1, y = scores$PC2, col = factor(scores$sampleCell), shape=(factor(scores$sampleTissue)), label=scores$sampleFiles )) +
-  geom_point(size = 5 ) + #geom_text(aes(label=scores$sampleName), nudge_x=runif(1, 2, 4), nudge_y = runif(1, -2.5, 2.5), check_overlap = FALSE, size=3) +
+  geom_point(size = 5 ) + 
   geom_text_repel(aes(label=scores$sampleName), box.padding = unit(1.0, "lines")) +
   xlab(pc1lab) + ylab(pc2lab) + ggtitle(paste(Project, " PCA (All Genes)", sep="")) +
-  scale_shape_discrete(name="Tissue") + scale_colour_manual(name="Cell Type", values = c("#1B9E77","#F27314", "purple", "red", "blue")) +
+  scale_shape_manual(name="Tissue", values = c(17, 16)) + 
+  scale_fill_manual(name="Cell Type",  values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +
+  scale_colour_manual(name="Cell Type", values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +
   theme(text = element_text(size=elementTextSize)) 
 dev.off()
 
@@ -1039,100 +920,23 @@ pca.1         <-  loadings[ order(loadings$PC1,decreasing=TRUE), ]
 pca.1.25      <-  pca.1[c(1:25),]
 pca.1.25.plot <- ggplot(data=pca.1.25, aes(x=factor(pca.1.25$external_gene_name,levels=unique(pca.1.25$external_gene_name)), y=PC1)) + geom_point(size = 5 ) + xlab("") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 
+pdf(paste(Project, "_SuppFig.S2A.pdf", sep=""),width=10,height=7)
+par(bg=NA)
+pca.1.25.plot
+dev.off()
+
 pca.2         <-  loadings[ order(loadings$PC2,decreasing=TRUE), ]
 pca.2.25      <-  pca.2[c(1:25),]
 pca.2.25.plot <- ggplot(data=pca.2.25, aes(x=factor(pca.2.25$external_gene_name,levels=unique(pca.2.25$external_gene_name)), y=PC2)) + geom_point(size = 5 ) + xlab("") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 
-pca.3         <-  loadings[ order(loadings$PC3,decreasing=TRUE), ]
-pca.3.25      <-  pca.3[c(1:25),]
-pca.3.25.plot <- ggplot(data=pca.3.25, aes(x=factor(pca.3.25$external_gene_name,levels=unique(pca.3.25$external_gene_name)), y=PC3)) + geom_point(size = 5 ) + xlab("") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
-
-pca.4         <-  loadings[ order(loadings$PC4,decreasing=TRUE), ]
-pca.4.25      <-  pca.4[c(1:25),]
-pca.4.25.plot <- ggplot(data=pca.4.25, aes(x=factor(pca.4.25$external_gene_name,levels=unique(pca.4.25$external_gene_name)), y=PC4)) + geom_point(size = 5 ) + xlab("") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
-
-
-pdf(paste(Project, "_DESeq2_PCA_Loadings.pdf", sep=""),width=10,height=7)
+pdf(paste(Project, "_SuppFig.S2B.pdf", sep=""),width=10,height=7)
 par(bg=NA)
-plot_grid(pca.1.25.plot, pca.2.25.plot, pca.3.25.plot, pca.4.25.plot, labels=c("A", "B", "C", "D"), ncol = 2, nrow = 2)
-dev.off()
-
-pc1var  <- round(summary(pca)$importance[2,1]*100,  digits=1)
-pc2var  <- round(summary(pca)$importance[2,2]*100,  digits=1)
-pc3var  <- round(summary(pca)$importance[2,3]*100,  digits=1)
-pc4var  <- round(summary(pca)$importance[2,4]*100,  digits=1)
-pc5var  <- round(summary(pca)$importance[2,5]*100,  digits=1)
-pc6var  <- round(summary(pca)$importance[2,6]*100,  digits=1)
-pc7var  <- round(summary(pca)$importance[2,7]*100,  digits=1)
-pc8var  <- round(summary(pca)$importance[2,8]*100,  digits=1)
-pc9var  <- round(summary(pca)$importance[2,9]*100,  digits=1)
-pc10var <- round(summary(pca)$importance[2,10]*100, digits=1)
-
-pcaVar = data.frame(pcs =c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10"),  
-                    vals=c(pc1var, pc2var, pc3var, pc4var, pc5var, pc6var, pc7var, pc8var, pc9var, pc10var))
-
-
-pdf(paste(Project, "_DESeq2_PCA_VarianceExplained.pdf", sep=""),width=10,height=7)
-par(bg=NA)
-ggplot(pcaVar, aes(factor(pcaVar$pcs,levels=unique(pcaVar$pcs)), vals)) + geom_col() + xlab("Principal Components") + ylab("Variance Explained") + ggtitle(paste0(Project, " Principal Components"))
-dev.off()
-
-library("scatterplot3d")
-
-
-head(scores, 15)
-
-scores$colours <- c("#1B9E77","#F27314","purple", "#1B9E77","#1B9E77","#F27314", "purple","purple","#1B9E77", "#F27314","purple","purple", "#1B9E77")
-
-pdf(paste(Project, "_DESeq2_PCA_3D.pdf", sep=""),width=10,height=7)
-par(bg=NA)
-scatterplot3d(scores$PC1, scores$PC3, scores$PC2, color=scores$colours, highlight.3d = FALSE, col.axis = "black", col.grid = "grey", main = paste0(Project, " 3D PCA"), pch = 20, xlab = "PC1", ylab="PC3", zlab="PC2")
+pca.2.25.plot
 dev.off()
 
 
 
-message("+-------------------------------------------------------------------------------")
-message("+ Create Per Gene Plots")
-message("+-------------------------------------------------------------------------------")
 
-
-makeGeneCountPlot <- function(dds,Project,gene2plot,outdir) {
-  #
-  # Plot the normalised read counts for a specified gene
-  #
-  if(missing(outdir)){ outdir = "" }
-  else( outdir <- paste(outdir, "/", sep=""))
-  
-  genename2plot <- ensEMBL2id[ensEMBL2id$ensembl_gene_id == gene2plot, ]$external_gene_name
-  t2            <- plotCounts(dds, gene=gene2plot, intgroup=c("group"), normalized=TRUE, returnData=TRUE)
-  
-  pdf(paste(outdir, Project, "-DGE_", gene2plot, "_collated.pdf", sep=""),width=10,height=7, onefile=FALSE)
-  par(bg=NA)
-  print({
-  ggplot(t2, aes(x=group, y=count, fill=group)) + geom_violin(trim=TRUE, alpha=.75)  + geom_boxplot(width = 0.1, fill='white') + 
-  geom_point(position=position_jitter(w=0.1,h=0), alpha=0.25) +
-  ggtitle(paste(Project, " ::: ", gene2plot, " ::: ", genename2plot, sep="")) + ylab(bquote('Normalised Read Count (' ~log[10]~ ')')) +
-  #scale_x_discrete(limits=c("Virgin", "E9.5","E18.5")) + 
-  scale_y_log10() +
-  #scale_fill_manual(values = c("#1B9E77","#F27314", "purple")) + 
-  theme(text = element_text(size=elementTextSize), legend.position="none") })
-  dev.off()
-  
-  t2$samples    <- rownames(t2)
-  
-  pdf(paste(outdir, Project, "-DGE_", gene2plot, "_individual.pdf", sep=""),width=10,height=7, onefile=FALSE)
-  par(bg=NA)
-  print({ ggplot(t2, aes(x=samples, y=count, fill=group)) + geom_bar(stat="identity", alpha=.75) +
-  #scale_fill_manual(values = c("#1B9E77","#F27314", "purple")) +
-  ylab(bquote('Normalised Read Count')) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size=elementTextSize)) + ggtitle(paste(Project, " ::: ", gene2plot, " ::: ", genename2plot, sep="")) })
-  dev.off()
-}
-
-
-makeGeneCountPlot(dds.group,Project,'ENSMUSG00000025044')
-  
-makeGeneCountPlot(dds.group,Project,'ENSMUSG00000028150')
 
 
 message("+-------------------------------------------------------------------------------")
@@ -1172,7 +976,7 @@ makeGeneSetExpressionPlot <- function(dds,Project,SelectedGeneList,SetName) {
   myHeight <- (1.3*nrow(as.data.frame(SelectedGeneList)))
   message(myHeight)
   
-  pdf(paste(Project, "-DGE_GeneSetExpressionPlot_", SetName, ".pdf", sep=""),width=3.5,height=myHeight, onefile=FALSE)
+  pdf(paste(Project, "_Figure.", SetName, ".pdf", sep=""),width=3.5,height=myHeight, onefile=FALSE)
   par(bg=NA)
   print({ plot })
   dev.off()
@@ -1181,52 +985,35 @@ makeGeneSetExpressionPlot <- function(dds,Project,SelectedGeneList,SetName) {
 }
 
 
-selected.TF    <- c("ENSMUSG00000028150", "ENSMUSG00000019256", "ENSMUSG00000001444", "ENSMUSG00000032446", "ENSMUSG00000015619", "ENSMUSG00000032238")
-plt.tf <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.TF,"TF")
-plt.tf
+# Figure 2C p1    2Cp1
+selected.2Cp1    <- c("ENSMUSG00000015533", "ENSMUSG00000030325", "ENSMUSG00000042284", "ENSMUSG00000062524")
+plt.2Cp1 <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.2Cp1,"2Cp1")
+# Figure 2C p2    2Cp2
+selected.2Cp2    <- c("ENSMUSG00000001444", "ENSMUSG00000032446", "ENSMUSG00000055170")
+plt.2Cp2 <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.2Cp2,"2Cp2")
+# Figure 2D       2D
+selected.2D    <- c("ENSMUSG00000004730", "ENSMUSG00000014361","ENSMUSG00000022901", "ENSMUSG00000026395")
+plt.2D   <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.2D,"2D")
+
+
+# Figure 4Ap1 
+selected.4A    <- c("ENSMUSG00000048521", "ENSMUSG00000030173")
+plt.4A <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.4Ap1,"4A")
+
+# Figure 4Fp1 
+selected.4Fp1    <- c("ENSMUSG00000030173", "ENSMUSG00000079852", "ENSMUSG00000079853", "ENSMUSG00000089727")
+plt.4Fp1 <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.4Fp1,"4Fp1")
+
+# Figure 4Fp2 
+selected.4Fp2    <- c("ENSMUSG00000033024", "ENSMUSG00000067599", "ENSMUSG00000005947", "ENSMUSG00000026581", "ENSMUSG00000031004")
+plt.4Fp2 <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.4Fp2,"4Fp2")
+
+# Figure 4Fp3 
+selected.4Fp3    <- c("ENSMUSG00000030149", "ENSMUSG00000030167","ENSMUSG00000030156", "ENSMUSG00000030336")
+plt.4Fp3 <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.4Fp3,"4Fp3")
 
 
 
-selected.SRT   <- c("ENSMUSG00000042284", "ENSMUSG00000030724", "ENSMUSG00000032093", "ENSMUSG00000030325", "ENSMUSG00000062524",
-                    "ENSMUSG00000030361", "ENSMUSG00000023274", "ENSMUSG00000024669", "ENSMUSG00000053977")
-plt.SRT <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.SRT,"Sorting")
-
-selected.TR   <- c("ENSMUSG00000037940", "ENSMUSG00000048521", "ENSMUSG00000019960", "ENSMUSG00000026573", "ENSMUSG00000074063",
-                   "ENSMUSG00000018381", "ENSMUSG00000049410", "ENSMUSG00000021591", "ENSMUSG00000045087", "ENSMUSG00000040596",
-                   "ENSMUSG00000057191", "ENSMUSG00000045382", "ENSMUSG00000044199", "ENSMUSG00000035900", "ENSMUSG00000042978",
-                   "ENSMUSG00000055148", "ENSMUSG00000110753", "ENSMUSG00000032412", "ENSMUSG00000022696", "ENSMUSG00000000782",
-                   "ENSMUSG00000043008", "ENSMUSG00000085603", "ENSMUSG00000045092", "ENSMUSG00000027330", "ENSMUSG00000036006",
-                   "ENSMUSG00000031453", "ENSMUSG00000032946",  "ENSMUSG00000020901", "ENSMUSG00000004568")
-plt.tr <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.TR,"TR")
-
-selected.MY   <- c("ENSMUSG00000022582", "ENSMUSG00000019966", "ENSMUSG00000005339", "ENSMUSG00000039013", "ENSMUSG00000030786",
-                   "ENSMUSG00000030789", "ENSMUSG00000019987", "ENSMUSG00000014361", "ENSMUSG00000004730", "ENSMUSG00000026395",
-                   "ENSMUSG00000051457", "ENSMUSG00000034783", "ENSMUSG00000079018", "ENSMUSG00000075122", "ENSMUSG00000022901",
-                   "ENSMUSG00000026712", "ENSMUSG00000031494", "ENSMUSG00000065987", "ENSMUSG00000040165", "ENSMUSG00000031495",
-                   "ENSMUSG00000040197", "ENSMUSG00000051906", "ENSMUSG00000014773", "ENSMUSG00000026923", "ENSMUSG00000035385",
-                   "ENSMUSG00000008845", "ENSMUSG00000024621", "ENSMUSG00000059326", "ENSMUSG00000071713", "ENSMUSG00000028859")
-plt.MY <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.MY,"Myeloid")
-
-selected.TLR <- c("ENSMUSG00000044827", "ENSMUSG00000027995", "ENSMUSG00000031639", "ENSMUSG00000039005", "ENSMUSG00000079164",
-                  "ENSMUSG00000051498", "ENSMUSG00000044583", "ENSMUSG00000040522", "ENSMUSG00000045322", "ENSMUSG00000051969",
-                  "ENSMUSG00000062545", "ENSMUSG00000033777")
-plt.TLR <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.TLR,"TLR")
-
-
-selected.MHC <- c("ENSMUSG00000036594", "ENSMUSG00000073421", "ENSMUSG00000079547", "ENSMUSG00000037649", "ENSMUSG00000060586",
-                  "ENSMUSG00000067341")
-plt.MHC <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.MHC,"MHC")
-
-
-selected.ILC <- c("ENSMUSG00000026069", "ENSMUSG00000034117", "ENSMUSG00000032011", "ENSMUSG00000003882")
-plt.ILC <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.ILC,"ILC")
-
-#selected.INT <- c("ENSMUSG00000055170", "ENSMUSG00000031712", "ENSMUSG00000020383", "ENSMUSG00000000869", "ENSMUSG00000036117",
-#                  "ENSMUSG00000025746", "ENSMUSG00000074695", "ENSMUSG00000025383", "ENSMUSG00000025929", "ENSMUSG00000024578",
-#                  "ENSMUSG00000046108", "ENSMUSG00000050222", "ENSMUSG00000025929", "ENSMUSG00000041872", "ENSMUSG00000016529",
-#                  "ENSMUSG00000002603", "ENSMUSG00000027776", "ENSMUSG00000004296", "ENSMUSG00000018916", "ENSMUSG00000014599",
-#                  "ENSMUSG00000038067", "ENSMUSG00000031750")
-#plt.INT <- makeGeneSetExpressionPlot(dds.group.FPKM,Project,selected.INT,"INT")
 
 
 message("+-------------------------------------------------------------------------------")
@@ -1262,12 +1049,12 @@ all.points.plot <- ggplot() +
 all.points.plot.indi <- all.points.plot + geom_point(data=all.points.df, aes(y = value, x = time, size=1, colour=cell), alpha=1.0, fill='white', shape=23) 
 
 
-CairoPDF(file = paste0(Project, "-BubbleTimePlot-All.pdf"), width = 12, height = 6, onefile = TRUE, family = "Arial" )
+CairoPDF(file = paste0(Project, "_Fig.1B.pdf"), width = 12, height = 6, onefile = TRUE, family = "Arial" )
 par(bg=NA)
 all.points.plot
 dev.off()
 
-CairoPDF(file = paste0(Project, "-BubbleTimePlot-All-withindividualpoints.pdf"), width = 12, height = 6, onefile = TRUE, family = "Arial" )
+CairoPDF(file = paste0(Project, "_SuppFig.S1.pdf"), width = 12, height = 6, onefile = TRUE, family = "Arial" )
 par(bg=NA)
 all.points.plot.indi
 dev.off()
@@ -1298,12 +1085,12 @@ inset.df.plot <- ggplot() +
 
 inset.df.plot.indi <- inset.df.plot + geom_point(data=inset.df, aes(y = value, x = time, size=1, colour=cell), alpha=1.0, fill='white', shape=23) 
 
-CairoPDF(file = paste0(Project, "-BubbleTimePlot-Inset.pdf"), width = 4, height = 6, onefile = TRUE, family = "Arial" )
+CairoPDF(file = paste0(Project, "_Fig.S1.inset.pdf"), width = 4, height = 6, onefile = TRUE, family = "Arial" )
 par(bg=NA)
 inset.df.plot
 dev.off()
 
-CairoPDF(file = paste0(Project, "-BubbleTimePlot-Inset-withindividualpoints.pdf"), width = 4, height = 6, onefile = TRUE, family = "Arial" )
+CairoPDF(file = paste0(Project, "_SuppFig.S1.inset.pdf"), width = 4, height = 6, onefile = TRUE, family = "Arial" )
 par(bg=NA)
 inset.df.plot.indi
 dev.off()
@@ -1388,10 +1175,6 @@ Decon_results_df1$tissue     <- sampleTable$tissue
 Decon_results_df1$group      <- sampleTable$group
 
 
-
-
-
-
 plot.Mast.Cells          <- makeCellTypeDeconvolutionPlot('Mast.Cells',          Decon_results_df1)
 plot.Neutrophil.Cells    <- makeCellTypeDeconvolutionPlot('Neutrophil.Cells',    Decon_results_df1)
 plot.Eosinophil.Cells    <- makeCellTypeDeconvolutionPlot('Eosinophil.Cells',    Decon_results_df1)
@@ -1445,15 +1228,15 @@ plot.DC.Actived             <- makeCellTypeDeconvolutionPlot('DC.Actived',      
 plot.DC.Immature            <- makeCellTypeDeconvolutionPlot('DC.Immature',        Decon_results_df3)
 
 
-pdf(paste0(Project, "-ImmuCC_DeconRNA-Seq_Grid.pdf"),width=20,height=20, onefile=FALSE)
-par(bg=NA)
-plot_grid(plot.Mast.Cells, plot.Neutrophil.Cells, plot.Eosinophil.Cells, plot.B.Cells.Memory, plot.B.Cells.Naive,
-          plot.Plasma.Cells, plot.T.Cells.CD8.Actived, plot.T.Cells.CD8.Naive, plot.T.Cells.CD8.Memory,plot.M0.Macrophage,
-          plot.M1.Macrophage, plot.M2.Macrophage, plot.Treg.Cells, plot.T.Cells.CD4.Memory, plot.T.Cells.CD4.Naive,
-          plot.T.Cells.CD4.Follicular, plot.Th1.Cells, plot.Th17.Cells, plot.Th2.Cells, plot.Monocyte,
-          plot.GammaDelta.T.Cells, plot.NK.Resting, plot.NK.Actived, plot.DC.Actived, plot.DC.Immature,
-          ncol = 5, nrow = 5)
-dev.off()
+#pdf(paste0(Project, "-ImmuCC_DeconRNA-Seq_Grid.pdf"),width=20,height=20, onefile=FALSE)
+#par(bg=NA)
+#plot_grid(plot.Mast.Cells, plot.Neutrophil.Cells, plot.Eosinophil.Cells, plot.B.Cells.Memory, plot.B.Cells.Naive,
+#          plot.Plasma.Cells, plot.T.Cells.CD8.Actived, plot.T.Cells.CD8.Naive, plot.T.Cells.CD8.Memory,plot.M0.Macrophage,
+#          plot.M1.Macrophage, plot.M2.Macrophage, plot.Treg.Cells, plot.T.Cells.CD4.Memory, plot.T.Cells.CD4.Naive,
+#          plot.T.Cells.CD4.Follicular, plot.Th1.Cells, plot.Th17.Cells, plot.Th2.Cells, plot.Monocyte,
+#          plot.GammaDelta.T.Cells, plot.NK.Resting, plot.NK.Actived, plot.DC.Actived, plot.DC.Immature,
+#          ncol = 5, nrow = 5)
+#dev.off()
 
 
 head(Decon_results_df1)
@@ -1469,6 +1252,26 @@ rownames(Decon_results_df) <- Decon_results_df$Row.names
 Decon_results_df$Row.names = NULL
 
 
+Decon_results_df.plot <- Decon_results_df
+Decon_results_df.plot <- within(Decon_results_df, rm("sampleName", "cell.x", "tissue.x", "group.x", "cell.y", "tissue.y", "group.y"))
+Decon_results_df.plot <- melt(Decon_results_df.plot)
+head(Decon_results_df.plot)
+
+pdf(paste0(Project, "_Fig.S4A.pdf"),width=12.5,height=15, onefile=FALSE)
+par(bg=NA)
+ggplot(Decon_results_df.plot, aes(x = group, y = value)) +
+  geom_boxplot(width = 0.1, alpha=0.5) +
+  geom_point(position=position_jitter(w=0.05,h=0), alpha=0.75, colour="red") +
+  labs(y = "Cell type fraction", x = "") +
+  facet_wrap( ~ variable , ncol=5) +
+  theme_minimal() +
+  theme(text = element_text(size=20), axis.text.x = element_text(angle = 90),
+        legend.position="none",
+        strip.text.x = element_text(face='bold'),
+        strip.background = element_rect(colour="white", fill='white'))
+dev.off()
+
+
 Decon_results_df.means      <- aggregate(Decon_results_df[, c(1:10,15:28)], list(Decon_results_df$group), mean)
 Decon_results_df.means.melt <- melt(Decon_results_df.means)
 
@@ -1481,13 +1284,8 @@ Decon_results_df.means.melt$normvars  <- Decon_results_df.means.melt$vars/max(De
 
 colnames(Decon_results_df.means.melt) <- c("Group", "Immune.Cell", "mean", "variance", "normalisedvariance")
 
-write.csv(Decon_results_df.means.melt, file=paste0(Project, "_Decon_results_df.means.melt.csv"))
 
-
-
-
-deconRNASeq.summary.table <- read.table("CTR_fc287_0001_Decon_results_df.means.melt.csv", sep=",", header=TRUE, row.names=1, stringsAsFactors = FALSE)
-
+deconRNASeq.summary.table <- Decon_results_df.means.melt
 selectedOrder <- rev(c("Treg.Cells","Th2.Cells","Th17.Cells","Th1.Cells","T.Cells.CD8.Naive",
                      "T.Cells.CD8.Actived","T.Cells.CD8.Memory","T.Cells.CD4.Naive","T.Cells.CD4.Memory","T.Cells.CD4.Follicular",
                      "GammaDelta.T.Cells","NK.Resting","NK.Actived","M0.Macrophage","M1.Macrophage",
@@ -1501,7 +1299,7 @@ deconRNASeq.summary.table$Group       <- gsub("ILC1", "ILC1\n", deconRNASeq.summ
 deconRNASeq.summary.table$Group       <- gsub("trNK", "trNK\n", deconRNASeq.summary.table$Group)
 
 
-pdf(paste0(Project, "-ImmuCC_DeconRNA-Seq-Bubble.pdf"),width=20,height=20, onefile=FALSE)
+pdf(paste0(Project, "_Fig.S4B.pdf"),width=20,height=20, onefile=FALSE)
 par(bg=NA)
 ggplot(deconRNASeq.summary.table, aes(y = Immune.Cell,x = Group)) +
   geom_point(aes(size = mean, colour = Group, alpha=(1-normalisedvariance))) + 

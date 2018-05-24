@@ -36,32 +36,44 @@ A custom module for TopHat2 double map is provided in this repository, and can b
 
 ### Scripts to reproduce paper figures ###
 
-All files are provides in this repository with the exception of the GFF file for the mouse reference genome. The GFF file can be downloaded (ftp://ftp.ensembl.org/pub/release-84/gtf/mus_musculus/Mus_musculus.GRCm38.84.gtf.gz) ad is required for the calculation of transcript lengths in the R script provided below. Once downloaded the GFF file can be uncompressed using the command:
+All files are provides in this repository with the exception of the GFF file for the mouse reference genome. The GFF file can be downloaded (ftp://ftp.ensembl.org/pub/release-84/gtf/mus_musculus/Mus_musculus.GRCm38.84.gtf.gz) and is required for the calculation of transcript lengths in the R script provided. Once downloaded the GFF file can be uncompressed using the command:
 
     gunzip Mus_musculus.GRCm38.84.gtf.gz
 
 The provided R script assumes the script is placed in a directory containing a subdirectory (called HTSeq_Counts) with all the htseq-counts files (one per sample). The script can be run interactively in R-studio or as a batch using Rscript. Note that some of the figures in the manuscript have had some labels and axes manually edited so may differ slightly from those created by the script provided.
 
-Figure    | Output Filename                         | Description  
---------- | --------------------------------------- | ------------------------
-1B        | 2018-Filipovic-Colucci_Fig1B.pdf        | Bubble Time Course Plot (main)
-1B        | 2018-Filipovic-Colucci_Fig1B.inset.pdf  | Bubble Time Course Plot (inset)
-2A        | 2018-Filipovic-Colucci_Fig2A.pdf        | Heatmap, all DEGs
-2B        | 2018-Filipovic-Colucci_Fig2B.pdf        | PCA all samples
-2C        | 2018-Filipovic-Colucci_Fig2C.pdf        | Custom Expression Plot
-2D        | 2018-Filipovic-Colucci_Fig2C.pdf        | Custom Expression Plot
-X1        | X1.pdf                                  | Heatmap
-X2        | X2.pdf                                  | Heatmap
-X3        | X3.pdf                                  | DeconRNASeq Immune Cell Proportion Estimates
-
+Figure    | Output Filename                             | Description  
+--------- | ------------------------------------------- | ------------------------
+1B        | 2018-Filipovic-Colucci_Fig.1B.pdf           | Bubble Time Course Plot (main)
+1B inset  | 2018-Filipovic-Colucci_Fig.1B.inset.pdf     | Bubble Time Course Plot (inset)
+S1        | 2018-Filipovic-Colucci_SuppFig.S1.pdf       | Bubble Time Course Plot with individual points (main)
+S1 inset  | 2018-Filipovic-Colucci_SuppFig.S1.inset.pdf | Bubble Time Course Plot with individual points (inset)
+2A        | 2018-Filipovic-Colucci_Fig.2A.pdf           | pHeatmap (top DEGs, all samples)
+2B        | 2018-Filipovic-Colucci_Fig.2B.pdf           | PCA all samples
+2C p1     | 2018-Filipovic-Colucci_Fig.2Cp1.pdf         | Custom Expression Plot (Panel 1)
+2C p2     | 2018-Filipovic-Colucci_Fig.2Cp2.pdf         | Custom Expression Plot (Panel 2)
+2D        | 2018-Filipovic-Colucci_Fig.2D.pdf           | Custom Expression Plot (Panel 3)
+S2A       | 2018-Filipovic-Colucci_SuppFig.S2A.pdf      | PCA PC1 Explained
+S2B       | 2018-Filipovic-Colucci_SuppFig.S2B.pdf      | PCA PC2 Explained
+3A        | 2018-Filipovic-Colucci_Fig.3A.pdf           | UpSetR Plot
+3B        | 2018-Filipovic-Colucci_Fig.3B.pdf           | Custom pHeatMap
+3C        | 2018-Filipovic-Colucci_Fig.3C.pdf           | Custom pHeatMap
+3D        | 2018-Filipovic-Colucci_Fig.3D.pdf           | Custom pHeatMap
+3E        | 2018-Filipovic-Colucci_Fig.3E.pdf           | Custom pHeatMap
+3F        | 2018-Filipovic-Colucci_Fig.3F.pdf           | Custom pHeatMap
+S3A       | 2018-Filipovic-Colucci_SuppFig.S3A.pdf      | MA Plot
+4A        | 2018-Filipovic-Colucci_Fig.4Ap1.pdf         | Custom Expression Plot
+4F p1     | 2018-Filipovic-Colucci_Fig.4Fp1.pdf         | Custom Expression Plot (Panel 1)
+4F p2     | 2018-Filipovic-Colucci_Fig.4Fp2.pdf         | Custom Expression Plot (Panel 2)
+4F p3     | 2018-Filipovic-Colucci_Fig.4Fp3.pdf         | Custom Expression Plot (Panel 3)
+S4A       | 2018-Filipovic-Colucci_Fig.S4A.pdf          | DeconRNASeq Immune Cell Proportion Estimates
+S4B       | 2018-Filipovic-Colucci_Fig.S4B.pdf          | DeconRNASeq Immune Cell Proportion Estimates
 
 #### Additional Methods Information ####
 
 ##### Figure X3: DeconRNASeq #####
 
 ![Images/deconRNA.png](Images/deconRNA.png?raw=true=100x)
-
-<img style="float: right;" src="Images/deconRNA.png">
 
 It is possible to estimate the proportions of specific immune cell types from bulk RNA-Seq using reference data generated from known proportions of the cell types of interest (Chen et al, 2017). Methods such as DeconRNASeq (Gong & Szustakowski, 2013) take these tables of known cell proportions, defined by gene expression profiles, and use them to deconvolve bulk to estimate cell proportions with in each of the sequences samples.
 
@@ -71,13 +83,16 @@ Gong, T., & Szustakowski, J. D. (2013). DeconRNASeq: a statistical framework for
 Chen, Z., Huang, A., Sun, J., Jiang, T., Qin, F. X.-F., & Wu, A. (2017). Inference of immune cell composition on the expression profiles of mouse tissue. Scientific Reports, 7, 40508.
 [10.1038/srep40508](http://dx.doi.org/10.1038/srep40508)
 
-##### Figure X4: UpSetR #####
+##### Figure 3A: UpSetR #####
 
 UpSetR is an alternative for plotting sets of data to visualise overlaps as a more intuitive replacement for Euler/Venn Diagrams.
+
+![Images/deconRNA.png](Images/upSetR.png?raw=true=100x)
 
 Conway, J. R., Lex, A., & Gehlenborg, N. (2017). UpSetR: an R package for the visualization of intersecting sets and their properties. Bioinformatics, 33(18), 2938–2940
 [10.1093/bioinformatics/btx364](https://doi.org/10.1093/bioinformatics/btx364)
 
+Comma separated value (csv) files are generated in the Rscript to identify the intersections of genes for each of the comparisons made.
 
 
 
@@ -160,7 +175,7 @@ SLX-9343.15  | cNK  | liver
 
 Description   | URL
 ------------- | ----------
-Publication   | [Journal](http://) and [DOI](http://) <br>(To be updated on publication)
+Publication   | [bioXriv](http://), [Journal](http://) and [DOI](http://) <br>(To be updated on publication)
 Raw Data      | ArrayExpress EMBL-EBI [E-MTAB-6812](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6812) <br>Data to be released on publication<br>
 Colucci Group | [Colucci group website](http://moffettcoluccilab.org/francesco-colucci/)
 
