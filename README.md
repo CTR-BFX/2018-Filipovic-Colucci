@@ -87,7 +87,7 @@ Chen, Z., Huang, A., Sun, J., Jiang, T., Qin, F. X.-F., & Wu, A. (2017). Inferen
 
 UpSetR is an alternative for plotting sets of data to visualise overlaps as a more intuitive replacement for Euler/Venn Diagrams.
 
-<img src="Images/upSetR.png" width="100"><BR>
+<img src="Images/upSetR.png" width="300"><BR>
 Conway, J. R., Lex, A., & Gehlenborg, N. (2017). UpSetR: an R package for the visualization of intersecting sets and their properties. Bioinformatics, 33(18), 2938–2940
 [10.1093/bioinformatics/btx364](https://doi.org/10.1093/bioinformatics/btx364)
 
