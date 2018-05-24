@@ -87,7 +87,7 @@ Chen, Z., Huang, A., Sun, J., Jiang, T., Qin, F. X.-F., & Wu, A. (2017). Inferen
 
 UpSetR is an alternative for plotting sets of data to visualise overlaps as a more intuitive replacement for Euler/Venn Diagrams.
 
-![Images/deconRNA.png](Images/upSetR.png?raw=true=100x)
+![Images/deconRNA.png](Images/upSetR.png?raw=true=10x)
 
 Conway, J. R., Lex, A., & Gehlenborg, N. (2017). UpSetR: an R package for the visualization of intersecting sets and their properties. Bioinformatics, 33(18), 2938–2940
 [10.1093/bioinformatics/btx364](https://doi.org/10.1093/bioinformatics/btx364)
@@ -100,7 +100,6 @@ Comma separated value (csv) files are generated in the Rscript to identify the i
 
 Description                          | Filename
 ------------------------------------ | ------------------------
-DEG Results: Uterine_vs_Liver        | 2018-Filipovic-Colucci_DESeq2_DEGs_Uterine_vs_Liver.csv
 Bubble Time Course Plot table        | [180410_all_points_uterus.txt ](DataTables/180410_all_points_uterus.txt)
 Bubble Time Course Plot inset table  | [180410_nBF.txt](DataTables/180410_nBF.txt)
 DeconRNASeq Immune Cell Proportions Table | [10.1038/srep40508](http://dx.doi.org/10.1038/srep40508)
