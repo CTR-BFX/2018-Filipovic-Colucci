@@ -14,8 +14,13 @@ Russell S. Hamilton<sup>2,3</sup>, Jean-Marc Doisne<sup>1,6</sup>, Gerard Eberl<
 <sup>9</sup> Department of Immunology, IRCCS Bambino Gesù Children’s Hospital, Rome, Italy <br>
 <sup>§</sup> Corresponding author: fc287@medschl.cam.ac.uk <br>
 
+### Publication ###
+
+Filipovic, I, Chiossone, L., Vacca, P., Hamilton, R.S., Doisne, J.M., Eberl, G., Walzer, T., Mingari, C., Sharkey, A., Moretta, L., Colucci, F. (2018) Molecular definition of group 1 innate lymphoid cells in the mouse uterus. [bioRxiv](https://www.biorxiv.org/content/early/2018/05/24/330068) 330068; doi: https://doi.org/10.1101/330068
+
 ### Abstract ###
-To be added
+
+Determining the function of uterine lymphocytes is challenging because of the rapidly changing nature of the organ in response to sex hormones and, during pregnancy, to the invading fetal trophoblast cells. Here we provide the first genome-wide transcriptome atlas of mouse uterine group 1 innate lymphoid cells (g1 ILCs) at mid-gestation. The composition of g1 ILCs fluctuates throughout reproductive life, with Eomes-veCD49a+ ILC1s dominating before puberty and specifically expanding in second pregnancies, when the expression of CXCR6, a marker of memory cells, is upregulated. Tissue-resident Eomes+CD49a+ NK cells (trNK), which resemble human uterine NK cells, are most abundant during early pregnancy, and showcase gene signatures of responsiveness to TGF-β, connections with trophoblast, epithelial, endothelial and smooth muscle cells, leucocytes, as well as extracellular matrix. Unexpectedly, trNK cells express genes involved in anaerobic glycolysis, lipid metabolism, iron transport, protein ubiquitination, and recognition of microbial molecular patterns. Conventional NK cells expand late in gestation and may engage in crosstalk with trNK cells involving IL-18 and IFN-γ. These results identify trNK cells as the cellular hub of uterine g1 ILCs at mid-gestation and mark CXCR6+ ILC1s as potential memory cells of pregnancy.
 
 ### Data Processing ###
 Data were aligned to GRCm38 mouse genome (Ensembl Release 84) with TopHat2 (v2.1.1, using bowtie2 v2.2.9) with a double map strategy. Alignments and QC were processed using custom ClusterFlow (v0.5dev) pipelines and assessed using MultiQC (0.9.dev0). Gene quantification was determined with HTSeq-Counts (v0.6.1p1). Additional quality control was performed with feature counts (v 1.5.0-p2), qualimap (v2.2) and preseq (v2.0.0). Differential gene expression was performed with DESeq2 package (v1.18.1, R v3.4.2) and with the same package read counts were normalised on the estimated size factors.
@@ -173,8 +178,8 @@ SLX-9343.15  | cNK  | liver
 
 Description   | URL
 ------------- | ----------
-Publication   | [bioXriv](http://), [Journal](http://) and [DOI](http://) <br>(To be updated on publication)
-Raw Data      | ArrayExpress EMBL-EBI [E-MTAB-6812](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6812) <br>Data to be released on publication<br>
+Publication   | [bioRxiv](https://www.biorxiv.org/content/early/2018/05/24/330068), [Journal](http://) and [DOI](http://) <br>(<i>To be updated on publication</i>)
+Raw Data      | ArrayExpress EMBL-EBI [E-MTAB-6812](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6812) <br>(<i>Data to be released on publication</i>)
 Colucci Group | [Colucci group website](http://moffettcoluccilab.org/francesco-colucci/)
 
 ### Contact ###
