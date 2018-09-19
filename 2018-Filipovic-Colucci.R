@@ -40,6 +40,7 @@
 #
 #source("http://bioconductor.org/biocLite.R")
 #biocLite('DESeq2')
+#biocLite("apeglm")
 #devtools::install_github('slowkow/ggrepel')
 #install.packages("ggrepel")
 #install.packages("gplots")
@@ -61,6 +62,10 @@ library("gtools")
 library("Cairo")
 library("GenomicRanges")
 library("rtracklayer")
+library("ggdendro")
+library("ggalt")
+library("apeglm")
+
 
 message("+-------------------------------------------------------------------------------")
 message("+ Set up some constants e.g. base directories")
@@ -127,6 +132,7 @@ print(sampleTable)
 message("+-------------------------------------------------------------------------------")
 message("+ Removing samples identified by QC")
 message("+-------------------------------------------------------------------------------")
+
 sampleTable <- sampleTable[-c(3,11),]
 print(sampleTable)
 
@@ -135,6 +141,7 @@ message("+----------------------------------------------------------------------
 message("+ Retrieve ensEMBL annotations")
 message("+-------------------------------------------------------------------------------")
 ensembl    <- useEnsembl(biomart="ensembl", host="http://mar2016.archive.ensembl.org", dataset="mmusculus_gene_ensembl")
+
 ensEMBL2id <- getBM(attributes=c('ensembl_gene_id', 'external_gene_name', 'description', 'entrezgene', 'chromosome_name', 'gene_biotype'), mart = ensembl)  
 head(ensEMBL2id)
 nrow(ensEMBL2id)
@@ -238,27 +245,53 @@ message("+----------------------------------------------------------------------
 message("+ Perform Comparisons of defined groups, tissues, cells")
 message("+-------------------------------------------------------------------------------")
 
-res_uterus_vs_liver                        <- results(dds.tissuecell, contrast=c("tissue", "uterus", "liver"))
+DESeq2Version <- "1.18.0"
 
-res_uterus_cNK_vs_uterus_trNK              <- results(dds.group,      contrast=c("group", "cNKuterus",  "trNKuterus")) 
-res_uterus_trNK_vs_uterus_cNK              <- results(dds.group,      contrast=c("group", "trNKuterus", "cNKuterus" )) 
+res_uterus_vs_liver                                                                    <- results(dds.tissuecell,   contrast=c("tissue", "uterus",  "liver"))
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_vs_liver                        <- lfcShrink(dds.tissuecell, contrast=c("tissue", "uterus",  "liver"),        type="normal") }
 
-res_uterus_cNK_vs_uterus_ILC1              <- results(dds.group,      contrast=c("group", "cNKuterus",  "ILC1uterus")) 
-res_uterus_ILC1_vs_uterus_trNK             <- results(dds.group,      contrast=c("group", "ILC1uterus", "trNKuterus")) 
 
-res_liver_cNK_vs_liver_ILC1                <- results(dds.group,      contrast=c("group", "cNKliver",   "ILC1liver" )) 
+res_uterus_cNK_vs_uterus_trNK                                                          <- results(dds.group,        contrast=c("group", "cNKuterus", "trNKuterus")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_cNK_vs_uterus_trNK              <- lfcShrink(dds.group,      contrast=c("group", "cNKuterus", "trNKuterus"),  type="normal") }
 
-res_uterus_cNK_vs_liver_cNK                <- results(dds.group,      contrast=c("group", "cNKuterus",  "cNKliver"  )) 
-res_uterus_ILC1_vs_liver_ILC1              <- results(dds.group,      contrast=c("group", "ILC1uterus", "ILC1liver" )) 
+res_uterus_trNK_vs_uterus_cNK                                                          <- results(dds.group,        contrast=c("group", "trNKuterus", "cNKuterus")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_trNK_vs_uterus_cNK              <- lfcShrink(dds.group,      contrast=c("group", "trNKuterus", "cNKuterus"),  type="normal") }
 
-res_uterus_trNK_vs_liver_ILC1              <- results(dds.group,      contrast=c("group", "trNKuterus", "ILC1liver" )) 
-res_uterus_trNK_vs_liver_cNK               <- results(dds.group,      contrast=c("group", "trNKuterus", "cNKliver"  )) 
+res_uterus_cNK_vs_uterus_ILC1                                                          <- results(dds.group,        contrast=c("group", "cNKuterus", "ILC1uterus")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_cNK_vs_uterus_ILC1              <- lfcShrink(dds.group,      contrast=c("group", "cNKuterus", "ILC1uterus"),  type="normal") }
 
-res_liver_cNK_vs_liver_ILC1                <- results(dds.group,      contrast=c("group", "cNKliver",   "ILC1liver" )) 
-res_uterus_cNK_vs_liver_ILC1               <- results(dds.group,      contrast=c("group", "cNKuterus",  "ILC1liver" )) 
+res_uterus_ILC1_vs_uterus_trNK                                                         <- results(dds.group,        contrast=c("group", "ILC1uterus", "trNKuterus")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_ILC1_vs_uterus_trNK             <- lfcShrink(dds.group,      contrast=c("group", "ILC1uterus", "trNKuterus"), type="normal") }
 
-res_uterus_trNK_uterus_ILC1_vs_liver_ILC1  <- results(dds.collated1,  contrast=c("collated1", "utrNK_uILC1", "lILC1"))
-res_uterus_ILC1_uterus_trNK_vs_uterus_cNK  <- results(dds.collated2,  contrast=c("collated2", "uILC1_utrNK", "ucNK"))
+res_liver_cNK_vs_liver_ILC1                                                            <- results(dds.group,        contrast=c("group", "cNKliver", "ILC1liver")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_liver_cNK_vs_liver_ILC1                <- lfcShrink(dds.group,      contrast=c("group", "cNKliver", "ILC1liver"),    type="normal") }
+
+res_uterus_cNK_vs_liver_cNK                                                            <- results(dds.group,        contrast=c("group", "cNKuterus", "cNKliver")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_cNK_vs_liver_cNK                <- lfcShrink(dds.group,      contrast=c("group", "cNKuterus", "cNKliver"),    type="normal") }
+
+res_uterus_ILC1_vs_liver_ILC1                                                          <- results(dds.group,        contrast=c("group", "ILC1uterus", "ILC1liver")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_ILC1_vs_liver_ILC1              <- lfcShrink(dds.group,      contrast=c("group", "ILC1uterus", "ILC1liver"),  type="normal") }
+
+res_uterus_trNK_vs_liver_ILC1                                                          <- results(dds.group,        contrast=c("group", "trNKuterus", "ILC1liver")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_trNK_vs_liver_ILC1              <- lfcShrink(dds.group,      contrast=c("group", "trNKuterus", "ILC1liver"),  type="normal") }
+
+res_uterus_trNK_vs_liver_cNK                                                           <- results(dds.group,        contrast=c("group", "trNKuterus", "cNKliver")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_trNK_vs_liver_cNK               <- lfcShrink(dds.group,      contrast=c("group", "trNKuterus", "cNKliver"),   type="normal") }
+
+res_liver_cNK_vs_liver_ILC1                                                            <- results(dds.group,        contrast=c("group", "cNKliver", "ILC1liver"))
+if(packageVersion("DESeq2")>DESeq2Version){ res_liver_cNK_vs_liver_ILC1                <- lfcShrink(dds.group,      contrast=c("group", "cNKliver", "ILC1liver"),    type="normal") }
+
+res_uterus_cNK_vs_liver_ILC1                                                           <- results(dds.group,        contrast=c("group", "cNKuterus", "ILC1liver")) 
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_cNK_vs_liver_ILC1               <- lfcShrink(dds.group,      contrast=c("group", "cNKuterus", "ILC1liver"),   type="normal") }
+
+
+res_uterus_trNK_uterus_ILC1_vs_liver_ILC1                                              <- results(dds.collated1,    contrast=c("collated1", "utrNK_uILC1", "lILC1"))
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_trNK_uterus_ILC1_vs_liver_ILC1  <- lfcShrink(dds.collated1,  contrast=c("collated1", "utrNK_uILC1", "lILC1"), type="normal") }
+
+res_uterus_ILC1_uterus_trNK_vs_uterus_cNK                                              <- results(dds.collated2,    contrast=c("collated2", "uILC1_utrNK", "ucNK"))
+if(packageVersion("DESeq2")>DESeq2Version){ res_uterus_ILC1_uterus_trNK_vs_uterus_cNK  <- lfcShrink(dds.collated2,  contrast=c("collated2", "uILC1_utrNK", "ucNK"),  type="normal") }
+
+
 
 message("+-------------------------------------------------------------------------------")
 message("+ Filter and output comparisons of defined groups, tissues, cells")
@@ -417,14 +450,30 @@ listInput <- list("uterus vs liver"                         = res_uterus_vs_live
                   'uterine trNK vs liver cNK'               = res_uterus_trNK_vs_liver_cNK.ann$ensembl_gene_id
                 )
 
+upset(fromList(listInput), nsets = 11, sets = rev(colnames(fromList(listInput))), cutoff = 7,
+      keep.order = TRUE, empty.intersections = "on", nintersects = 11, 
+      sets.x.label = "Number of differentially expressed genes", mainbar.y.label = "Intersections of Differentially Expressed Genes")
 
 
-pdf(paste(Project, "_Fig.3A.pdf", sep=""),width=10,height=7, onefile=FALSE)
+
+
+pdf(paste(Project, "_Fig.3A_11sets.pdf", sep=""),width=10,height=7, onefile=FALSE)
 par(bg=NA)
-upset(fromList(listInput), nsets = 11, sets = rev(colnames(fromList(listInput))), 
+upset(fromList(listInput), nsets = 11, sets = rev(colnames(fromList(listInput))), cutoff = 7,
       keep.order = TRUE, empty.intersections = "on", nintersects = 11, 
       sets.x.label = "Number of differentially expressed genes", mainbar.y.label = "Intersections of Differentially Expressed Genes")
 dev.off()
+
+
+pdf(paste(Project, "_Fig.3A_5sets.pdf", sep=""),width=10,height=7, onefile=FALSE)
+par(bg=NA)
+upset(fromList(listInput), nsets = 5, sets = rev(colnames(fromList(listInput)))[7:11], cutoff = 10,
+      keep.order = TRUE, empty.intersections = "on", nintersects = 5, #group.by = "sets", #order.by = c("freq", "degree"),
+      sets.x.label = "Number of differentially expressed genes", mainbar.y.label = "Intersections of Differentially Expressed Genes")
+dev.off()
+
+
+
 
 
 
@@ -808,7 +857,7 @@ dev.off()
 # pHeatMap Figure 2A
 #
 
-logFoldChanceCutOff <- 5
+logFoldChanceCutOff <- 7.5
 significance        <- 0.01
 
 res_uterus_cNK_vs_uterus_trNK.ann              <- functionGetSigDEG(as.data.frame(res_uterus_cNK_vs_uterus_trNK),             Project,"res_uterus_cNK_vs_uterus_trNK",             significance,logFoldChanceCutOff,ensEMBL2id, as.data.frame(rld.group.ann))
@@ -843,12 +892,13 @@ mat3.df$ensembl_gene_id <- rownames(mat3.df)
 mat3.ann                <- merge(mat3.df, ensEMBL2id, by="ensembl_gene_id")
 mat3.ann                <- mat3.ann[ !duplicated(mat3.ann[,c("external_gene_name")]) , ]
 rownames(mat3.ann)      <- mat3.ann$external_gene_name
-mat3.ann                <- within(mat3.ann, rm("ensembl_gene_id","external_gene_name","description","entrezgene","chromosome_name","gene_biotype","Length"))
+#mat3.ann                <- within(mat3.ann, rm("ensembl_gene_id","external_gene_name","description","entrezgene","chromosome_name","gene_biotype","Length"))
+mat3.ann                <- within(mat3.ann, rm("ensembl_gene_id","external_gene_name","description","entrezgene","chromosome_name","gene_biotype"))
 matrix3                 <- as.matrix(mat3.ann)
 
 colors<-colorRampPalette(rev(brewer.pal(n=11,name="RdBu")))(255)
 
-pdf(paste0(Project, "_Fig.2A",  ".pdf"), width=10,height=7, onefile=FALSE)
+pdf(paste0(Project, "_Fig.2A.l2fc.", logFoldChanceCutOff, ".padj.", significance,  ".pdf"), width=7,height=12, onefile=FALSE)
 par(bg=NA)
 pheatmap(matrix3, cluster_rows=TRUE, show_rownames=FALSE, show_colnames=FALSE, cluster_cols=TRUE, annotation_col=df3, 
          annotation_colors=list(tissue=c(liver="lightgrey",uterus="darkgrey"), cell=c(cNK="orange", ILC1="firebrick3", trNK="steelblue3")),
@@ -866,6 +916,99 @@ dev.off()
 message("+-------------------------------------------------------------------------------")
 message("+ Create PCA Plots")
 message("+-------------------------------------------------------------------------------")
+
+customPCA <- function(sampleTBL, RLD, TOPNUM, model) {
+  
+  rv     <- rowVars(RLD)
+  select <- order(rv, decreasing = TRUE)[seq_len(min(TOPNUM, length(rv)))]
+  pca    <- prcomp(t(RLD[select, ]))
+  
+  pc1var <- round(summary(pca)$importance[2,1]*100, digits=1)
+  pc2var <- round(summary(pca)$importance[2,2]*100, digits=1)
+  pc1lab <- paste0("PC1 (",as.character(pc1var),"%)")
+  pc2lab <- paste0("PC2 (",as.character(pc2var),"%)")
+  
+  scores    <- data.frame(sampleName=sampleTBL$sampleName, pca$x, condition=sampleTBL$group, Tissue=sampleTBL$tissue, Cell=sampleTBL$cell)
+   
+  plt.pca <- ggplot(scores, aes(x = PC1, y = PC2, colour=Cell, fill=Cell, shape=(factor(scores$Tissue)), label=scores$sampleName) ) +
+             geom_point(size = 3, alpha=0.75 ) + 
+             geom_text_repel(aes(label=sampleName), show.legend = FALSE) +
+             xlab(pc1lab) + ylab(pc2lab) + #coord_fixed() +
+             ggtitle(paste0("PCA Top ", TOPNUM, " MV")) +             
+             scale_shape_manual(name="Tissue", values = c(17, 16)) + 
+             scale_fill_manual(name="Cell Type",  values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +
+             scale_colour_manual(name="Cell Type", values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +    
+             theme(text = element_text(size=elementTextSize)) 
+  
+  plt.pca.nl <- ggplot(scores, aes(x = PC1, y = PC2, colour=Cell, fill=factor(scores$Cell), shape=(factor(scores$Tissue)), label=scores$sampleName) ) +
+                #geom_encircle(alpha = 0.2, show.legend = FALSE) +
+                geom_point(size = 6, alpha=0.75 ) + 
+                xlab(pc1lab) + ylab(pc2lab) + #coord_fixed() +
+                ggtitle(paste0("PCA Top ", TOPNUM, " MV")) +
+                scale_shape_manual(name="Tissue", values = c(17, 16)) + 
+                scale_fill_manual(name="Cell Type",  values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +
+                scale_colour_manual(name="Cell Type", values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +    
+                theme(text = element_text(size=elementTextSize)) 
+  
+  dd.row          <- as.dendrogram(hclust(dist(t( RLD[select, ]))))
+  ddata           <- dendro_data(dd.row)
+  labs            <- label(ddata)
+  labs$sampleName <- labs$label
+  annotations     <- merge(labs, sampleTBL, by="sampleName")
+  
+  plt.dendro <- ggplot(segment(ddata)) +
+                geom_segment(aes(x=x, y=y, xend=xend, yend=yend)) +
+                geom_text(data=annotations,aes(label=paste0(cell, "-", tissue), x=x, y=-0.25, angle=-90, colour=annotations$cell), hjust=0) +
+                scale_colour_manual(name="Cell Type", values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +   
+                scale_y_continuous(breaks=seq(0, max(ddata$segments$y), 50)) +
+                expand_limits(y=c( -1*(max(ddata$segments$y)/2)), max(ddata$segments$y) ) + 
+                ylab("distance") + xlab("") +
+                ggtitle(paste0("Dendrogram Top ", TOPNUM, " MV")) +
+                theme(text = element_text(size=elementTextSize), legend.position="none",
+                      axis.text.x = element_blank(),  axis.ticks.x = element_blank() )
+  
+  return(list(plt.pca, plt.pca.nl, plt.dendro) )
+}
+
+
+pca.plt.rld.250            <- customPCA(sampleTable, assay(rld.group), 250, "rld")
+pca.plt.rld.250[[1]]
+pca.plt.rld.250[[2]]
+
+pca.plt.rld.500            <- customPCA(sampleTable, assay(rld.group), 500, "rld")
+pca.plt.rld.1000           <- customPCA(sampleTable, assay(rld.group), 1000, "rld")
+pca.plt.rld.47000          <- customPCA(sampleTable, assay(rld.group), 47000, "rld")
+
+pdf(paste(Project, "_Fig.PCA.pdf", sep=""),width=10,height=7)
+par(bg=NA)
+plot_grid(pca.plt.rld.250[[2]], pca.plt.rld.500[[2]], pca.plt.rld.1000[[2]], pca.plt.rld.47000[[2]], nrow=2, ncol=2)
+dev.off()
+
+pdf(paste(Project, "_Fig.PCA_250MV.pdf", sep=""),width=10,height=7)
+par(bg=NA)
+pca.plt.rld.250[[2]]
+dev.off()
+
+pdf(paste(Project, "_Fig.hclust.pdf", sep=""),width=10,height=7)
+par(bg=NA)
+plot_grid(pca.plt.rld.250[[3]], pca.plt.rld.500[[3]], pca.plt.rld.1000[[3]], pca.plt.rld.47000[[3]], nrow=2, ncol=2)
+dev.off()
+
+
+library("RColorBrewer")
+sampleDists                <- dist(t(assay(vsd.group)))
+sampleDistMatrix           <- as.matrix(sampleDists)
+rownames(sampleDistMatrix) <- paste(vsd.group$tissue, vsd.group$cell, sep="-")
+colnames(sampleDistMatrix) <- NULL
+colors                     <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+
+pdf(paste(Project, "_Fig.SampleSimMatrix.pdf", sep=""),width=8,height=7)
+par(bg=NA)
+pheatmap(sampleDistMatrix, clustering_distance_rows=sampleDists, clustering_distance_cols=sampleDists, col=colors)
+dev.off()
+
+
+
 
 rv     = rowVars(assay(rld.group))
 select = order(rv, decreasing = TRUE)[seq_len(min(47000, length(rv)))]
@@ -904,6 +1047,7 @@ ggplot(data=scores,
   scale_colour_manual(name="Cell Type", values = c("cNK"="#FFCC00", "ILC1"="#EA5160", "trNK"="#0099FF")) +
   theme(text = element_text(size=elementTextSize)) 
 dev.off()
+
 
 message("+-------------------------------------------------------------------------------")
 message("+ Explore PCA Loadings")
