@@ -16,7 +16,9 @@ Russell S. Hamilton<sup>2,3</sup>, Jean-Marc Doisne<sup>1,6</sup>, Gerard Eberl<
 
 ### Publication ###
 
-Filipovic, I, Chiossone, L., Vacca, P., Hamilton, R.S., Doisne, J.M., Eberl, G., Walzer, T., Mingari, C., Sharkey, A., Moretta, L., Colucci, F. (2018) Molecular definition of group 1 innate lymphoid cells in the mouse uterus. [bioRxiv](https://www.biorxiv.org/content/early/2018/05/24/330068) 330068; doi: https://doi.org/10.1101/330068
+Filipovic, I, Chiossone, L., Vacca, P., Hamilton, R.S., Doisne, J.M., Eberl, G., Walzer, T., Mingari, C., Sharkey, A., Moretta, L., Colucci, F. (2018) Molecular definition of group 1 innate lymphoid cells in the mouse uterus. [[Nature Communications, <b>9</b>, 4492]](https://www.nature.com/articles/s41467-018-06918-3) [[DOI]](https://doi.org/10.1038/s41467-018-06918-3)
+
+[[bioRxiv, <b>330068</b>]](https://www.biorxiv.org/content/early/2018/05/24/330068) [[DOI]](https://doi.org/10.1101/330068)
 
 ### Abstract ###
 
@@ -180,9 +182,10 @@ SLX-9343.15  | cNK  | liver
 
 Description   | URL
 ------------- | ----------
-Publication   | [bioRxiv](https://www.biorxiv.org/content/early/2018/05/24/330068), [Journal](http://) and [DOI](http://) <br>(<i>To be updated on publication</i>)
-Raw Data      | ArrayExpress EMBL-EBI [E-MTAB-6812](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6812) <br>(<i>Data to be released on publication</i>)
+Publication   | [[Nature Communications, <b>9</b>, 4492]](https://www.nature.com/articles/s41467-018-06918-3) [[DOI]](https://doi.org/10.1038/s41467-018-06918-3) <br> [[bioRxiv]](https://www.biorxiv.org/content/early/2018/05/24/330068) [[DOI]](https://doi.org/10.1101/330068)
+Raw Data      | ArrayExpress EMBL-EBI [E-MTAB-6812](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6812)
 Colucci Group | [Colucci group website](http://moffettcoluccilab.org/francesco-colucci/)
+CTR Bioinformatics | [CTR-BFX](https://www.trophoblast.cam.ac.uk/Resources/BioInformatics)
 
 ### Contact ###
 
