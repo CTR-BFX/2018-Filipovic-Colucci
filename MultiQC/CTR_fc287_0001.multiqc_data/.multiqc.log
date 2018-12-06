@@ -1,0 +1,254 @@
+[2016-11-21 11:01:47,045] multiqc                                            [DEBUG  ]  No MultiQC config found: /home/rsh46/.local/lib/python2.7/site-packages/multiqc_config.yaml
+[2016-11-21 11:01:47,045] multiqc                                            [DEBUG  ]  No MultiQC config found: /home/rsh46/.multiqc_config.yaml
+[2016-11-21 11:01:47,046] multiqc                                            [DEBUG  ]  No MultiQC config found: multiqc_config.yaml
+[2016-11-21 11:01:47,070] multiqc                                            [DEBUG  ]  Loading config settings from: CTR_fc287_0001.config.yaml
+[2016-11-21 11:01:47,070] multiqc                                            [DEBUG  ]  New config 'custom_logo_url': http://www.trophoblast.cam.ac.uk/Resources/BioInformatics
+[2016-11-21 11:01:47,070] multiqc                                            [DEBUG  ]  New config 'data_dir_name': CTR_fc287_0001.multiqc_data
+[2016-11-21 11:01:47,070] multiqc                                            [DEBUG  ]  New config 'subtitle': Centre for Trophoblast Research, University of Cambridge
+[2016-11-21 11:01:47,071] multiqc                                            [DEBUG  ]  New config 'fn_ignore_files': ['*tophatrun2.align_summary.txt']
+[2016-11-21 11:01:47,071] multiqc                                            [DEBUG  ]  New config 'title': Project ID ::: CTR_fc287_0001
+[2016-11-21 11:01:47,071] multiqc                                            [DEBUG  ]  New config 'intro_text': Created by CTR Bioinformatics
+[2016-11-21 11:01:47,071] multiqc                                            [DEBUG  ]  New config 'custom_logo_title': Centre for Trophoblast Research, University of Cambridge
+[2016-11-21 11:01:47,071] multiqc                                            [DEBUG  ]  New config 'report_header_info': [{'Analysis by:': 'Russell S. Hamilton'}, {'Contact E-mail:': 'rsh46@cam.ac.uk'}, {'Application Type:': 'RNA-seq'}, {'Project Type:': 'Differential Gene Expression'}, {'Project Owners:': 'Iva Filipovic / Francesco Colucci'}, {'Sequencing Platform:': 'Illumina Hiseq2500'}, {'Sequencing Setup:': 'SE 50bp'}]
+[2016-11-21 11:01:47,071] multiqc                                            [DEBUG  ]  New config 'custom_logo': /home/rsh46/scratch/Logo/CTR_600.png
+[2016-11-21 11:01:47,071] multiqc                                            [DEBUG  ]  New config 'output_fn_name': CTR_fc287_0001.multiqc_report.html
+[2016-11-21 11:01:47,072] multiqc                                            [DEBUG  ]  No MultiQC config found: /home/rsh46/.local/lib/python2.7/site-packages/multiqc_config.yaml
+[2016-11-21 11:01:47,072] multiqc                                            [DEBUG  ]  No MultiQC config found: /home/rsh46/.multiqc_config.yaml
+[2016-11-21 11:01:47,072] multiqc                                            [DEBUG  ]  No MultiQC config found: multiqc_config.yaml
+[2016-11-21 11:01:47,072] multiqc                                            [DEBUG  ]  Command used: /home/rsh46/.local/bin/multiqc -f -c CTR_fc287_0001.config.yaml .
+[2016-11-21 11:01:47,072] multiqc                                            [DEBUG  ]  Could not connect to multiqc.info for version check
+[2016-11-21 11:01:47,072] multiqc                                            [INFO   ]  This is MultiQC v0.9.dev0
+[2016-11-21 11:01:47,072] multiqc                                            [DEBUG  ]  Command     : /home/rsh46/.local/bin/multiqc -f -c CTR_fc287_0001.config.yaml .
+[2016-11-21 11:01:47,072] multiqc                                            [DEBUG  ]  Working dir : /scratch/rsh46/CTR-Data/CTR_fc287_0001
+[2016-11-21 11:01:47,072] multiqc                                            [INFO   ]  Template    : default
+[2016-11-21 11:01:47,073] multiqc                                            [DEBUG  ]  Running in --force mode, will overwrite any existing reports.
+[2016-11-21 11:01:47,073] multiqc                                            [INFO   ]  Report title: Project ID ::: CTR_fc287_0001
+[2016-11-21 11:01:47,073] multiqc                                            [INFO   ]  Searching '.'
+[2016-11-21 11:01:47,073] multiqc                                            [DEBUG  ]  Analysing modules: gatk, quast, snpeff, qualimap, bcftools, featureCounts, methylQA, rseqc, picard, preseq, samblaster, samtools, bamtools, bismark, hicup, salmon, kallisto, star, tophat, bowtie2, bowtie1, cutadapt, trimmomatic, skewer, fastq_screen, fastqc
+[2016-11-21 11:01:47,073] multiqc                                            [DEBUG  ]  Using temporary directory for creating report: /tmp/tmpERLJi9
+[2016-11-21 11:01:47,139] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,139] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,139] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,139] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,140] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,140] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,140] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,140] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,140] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,141] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,141] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,141] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,141] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,142] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,142] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,142] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,142] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,143] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,143] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,143] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,143] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.HGHVHBBXX.s_1.r_1.lostreads.fq.gz
+[2016-11-21 11:01:47,143] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,144] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,144] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,144] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,144] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,145] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,145] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,145] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,145] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,146] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,146] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,146] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,146] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,147] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,147] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,147] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,147] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,147] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,148] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,148] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,148] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,149] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,149] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,149] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,149] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,149] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,150] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,150] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,150] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,150] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,150] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,150] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,151] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,151] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,151] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,151] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,151] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_sorted_md.bam
+[2016-11-21 11:01:47,151] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,152] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,152] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,152] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,152] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,153] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,153] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,154] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,154] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,154] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,154] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,154] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,154] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,155] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,155] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,156] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,156] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,156] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,157] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,157] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,157] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,157] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,157] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,158] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,158] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun2.align_summary.txt
+[2016-11-21 11:01:47,158] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,158] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,159] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1.fq.gz
+[2016-11-21 11:01:47,159] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed.fq.gz
+[2016-11-21 11:01:47,159] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,159] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,160] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt
+[2016-11-21 11:01:47,160] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam
+[2016-11-21 11:01:47,160] multiqc                                            [DEBUG  ]  Ignoring file as too large: SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_htseq_annotated.bam
+[2016-11-21 11:01:47,182] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,183] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,183] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,183] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,186] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,186] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,199] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,199] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,199] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,204] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,205] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,231] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,231] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,236] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,267] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,268] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,272] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,273] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,273] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,273] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,277] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,278] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,285] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,285] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,285] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,297] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,297] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,306] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,306] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,306] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,314] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,315] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,357] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,358] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,358] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,365] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,366] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,406] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,407] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,407] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,407] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,447] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,448] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,505] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,505] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,506] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,506] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,529] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,530] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,542] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,542] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,543] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,546] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,547] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,550] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,550] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,550] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,550] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,562] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,562] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,569] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,569] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,569] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,570] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,585] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,585] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,620] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,620] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,621] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,628] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,628] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,692] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,692] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,692] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,692] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,701] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,701] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,716] multiqc                                            [DEBUG  ]  Ignoring file as is encoded: unmapped.fq.gz
+[2016-11-21 11:01:47,717] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:01:47,717] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits.bam
+[2016-11-21 11:01:47,718] multiqc                                            [DEBUG  ]  Ignoring file as too large: junctions.bed
+[2016-11-21 11:01:47,724] multiqc                                            [DEBUG  ]  Ignoring file as too large: accepted_hits_merged.bam
+[2016-11-21 11:01:47,724] multiqc                                            [DEBUG  ]  Ignoring file as too large: unmapped.bam
+[2016-11-21 11:02:10,196] multiqc.modules.gatk.gatk                          [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:02:10,282] multiqc.modules.quast.quast                        [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:02:19,747] multiqc.modules.snpeff.snpeff                      [DEBUG  ]  Could not find any data in ('.',)
+[2016-11-21 11:02:20,155] multiqc.modules.qualimap.qualimap                  [INFO   ]  Found 15 RNASeq reports
+[2016-11-21 11:02:29,710] multiqc.modules.bcftools.bcftools                  [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:02:29,831] multiqc.modules.featureCounts.feature_counts       [INFO   ]  Found 15 reports
+[2016-11-21 11:02:29,916] multiqc.modules.methylQA.methylQA                  [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:03:08,253] multiqc.modules.rseqc.rseqc                        [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:04:26,676] multiqc.modules.picard.picard                      [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:04:36,212] multiqc.modules.preseq.preseq                      [DEBUG  ]  Could not find any preseq data in ('.',)
+[2016-11-21 11:04:45,651] multiqc.modules.samblaster.samblaster              [DEBUG  ]  Could not find any data in ('.',)
+[2016-11-21 11:05:05,075] multiqc.modules.samtools.samtools                  [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:05:14,645] multiqc.modules.bamtools.bamtools                  [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:05:14,884] multiqc.modules.bismark.bismark                    [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:05:14,964] multiqc.modules.hicup.hicup                        [DEBUG  ]  Could not find any HiCUP data in ('.',)
+[2016-11-21 11:05:15,074] multiqc.modules.salmon.salmon                      [DEBUG  ]  Could not find any Salmon data in ('.',)
+[2016-11-21 11:05:24,647] multiqc.modules.kallisto.kallisto                  [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:05:24,717] multiqc.modules.star.star                          [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:05:24,813] multiqc.modules.tophat.tophat                      [INFO   ]  Found 15 reports
+[2016-11-21 11:05:34,390] multiqc.modules.bowtie2.bowtie2                    [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:05:43,914] multiqc.modules.bowtie1.bowtie1                    [DEBUG  ]  Could not find any reports in ('.',)
+[2016-11-21 11:05:45,238] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,242] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,404] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,411] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,426] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,452] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,586] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,590] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,611] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,629] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:45,633] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:46,012] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:46,016] multiqc.modules.cutadapt.cutadapt                  [DEBUG  ]  Duplicate sample name found! Overwriting: SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1
+[2016-11-21 11:05:53,788] multiqc.modules.cutadapt.cutadapt                  [INFO   ]  Found 15 reports
+[2016-11-21 11:06:03,400] multiqc.modules.trimmomatic.trimmomatic            [DEBUG  ]  Could not find any Trimmomatic data in ('.',)
+[2016-11-21 11:06:13,312] multiqc.modules.skewer.skewer                      [DEBUG  ]  Could not find any data in ('.',)
+[2016-11-21 11:06:13,398] multiqc.modules.fastq_screen.fastq_screen          [INFO   ]  Found 15 reports
+[2016-11-21 11:06:19,328] multiqc.modules.fastqc.fastqc                      [INFO   ]  Found 30 reports
+[2016-11-21 11:06:21,328] multiqc                                            [WARNING]  Deleting    : CTR_fc287_0001.multiqc_report.html   (-f was specified)
+[2016-11-21 11:06:21,330] multiqc                                            [INFO   ]  Report      : CTR_fc287_0001.multiqc_report.html
+[2016-11-21 11:06:21,331] multiqc                                            [WARNING]  Deleting    : CTR_fc287_0001.multiqc_data   (-f was specified)
+[2016-11-21 11:06:21,336] multiqc                                            [INFO   ]  Data        : CTR_fc287_0001.multiqc_data
+[2016-11-21 11:06:21,336] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpERLJi9/multiqc_data/multiqc_sources.txt' to '/scratch/rsh46/CTR-Data/CTR_fc287_0001/CTR_fc287_0001.multiqc_data'
+[2016-11-21 11:06:21,347] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpERLJi9/multiqc_data/multiqc_general_stats.txt' to '/scratch/rsh46/CTR-Data/CTR_fc287_0001/CTR_fc287_0001.multiqc_data'
+[2016-11-21 11:06:21,354] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpERLJi9/multiqc_data/multiqc_fastqc.txt' to '/scratch/rsh46/CTR-Data/CTR_fc287_0001/CTR_fc287_0001.multiqc_data'
+[2016-11-21 11:06:21,360] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpERLJi9/multiqc_data/multiqc_fastq_screen.txt' to '/scratch/rsh46/CTR-Data/CTR_fc287_0001/CTR_fc287_0001.multiqc_data'
+[2016-11-21 11:06:21,366] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpERLJi9/multiqc_data/multiqc_cutadapt.txt' to '/scratch/rsh46/CTR-Data/CTR_fc287_0001/CTR_fc287_0001.multiqc_data'
+[2016-11-21 11:06:21,370] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpERLJi9/multiqc_data/multiqc_tophat.txt.txt' to '/scratch/rsh46/CTR-Data/CTR_fc287_0001/CTR_fc287_0001.multiqc_data'
+[2016-11-21 11:06:21,373] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpERLJi9/multiqc_data/multiqc_featureCounts.txt' to '/scratch/rsh46/CTR-Data/CTR_fc287_0001/CTR_fc287_0001.multiqc_data'
+[2016-11-21 11:06:21,919] multiqc                                            [INFO   ]  MultiQC complete

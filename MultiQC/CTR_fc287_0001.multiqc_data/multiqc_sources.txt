@@ -1,0 +1,121 @@
+Module	Section	Sample Name	Source
+featureCounts	all_sections	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+featureCounts	all_sections	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged.bam_featureCounts_counts.txt.summary
+FastQC	all_sections	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_fastqc.zip
+FastQC	all_sections	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_fastqc.zip
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_screen.txt
+FastQ Screen	all_sections	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_screen	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_screen.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1.fq.gz_trimming_report.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1.fq.gz_trimming_report.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1.fq.gz_trimming_report.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1.fq.gz_trimming_report.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1.fq.gz_fastq_tophat_double_clusterFlow.txt
+Cutadapt	all_sections	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1.fq.gz_trimming_report.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+Tophat	all_sections	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.tophatrun1.align_summary.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_genome_results	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/rnaseq_qc_results.txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC15.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC02.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC14.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC13.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC05.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC07.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC03.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC06.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC04.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC11.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC10.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC08.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC09.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC12.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
+QualiMap	rna_coverage_histogram	SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed	/scratch/rsh46/CTR-Data/CTR_fc287_0001/SLX-9343.L2V18DRBC01.HGHVHBBXX.s_1.r_1_trimmed_tophat.accepted_hits_merged_qualimap-rnaseq/raw_data_qualimapReport/coverage_profile_along_genes_(total).txt
